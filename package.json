@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "all": "nx run-many --parallel --target=serve --projects=app,api",
+    "allBuild": "nx run-many --target=build --projects=api,app --parallel",
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test"
@@ -13,6 +15,7 @@
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
     "@nrwl/next": "^14.1.9",
+    "concurrently": "^7.2.1",
     "core-js": "^3.6.5",
     "next": "12.1.5",
     "react": "18.1.0",

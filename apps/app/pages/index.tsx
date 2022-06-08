@@ -8,7 +8,7 @@ const StyledPage = styled.div`
 `;
 
 export function Index() {
-  const [test, setStest] = useState<Foo[]>([]);
+  const [test, setStest] = useState<Foo>();
 
   useEffect(() => {
     fetch(`http://localhost:3333/api`)
@@ -16,6 +16,9 @@ export function Index() {
       .then((data) => setStest(data))
       .catch((e) => console.log(e));
   }, []);
+
+  const foo: { a?: string } = { a: undefined };
+  console.log(foo?.a ?? foo.a?.toString());
 
   /*
    * Replace the elements below with your own.
@@ -28,7 +31,7 @@ export function Index() {
         <div className="container">
           <div id="welcome">
             <h1>
-              <span> Hello there, {test.message} </span>
+              <span> Hello there, {test?.message} </span>
               Welcome app 👋
             </h1>
           </div>
