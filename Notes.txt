@@ -13,3 +13,7 @@ nx g @nrwl/react:app psych
 
 
 github actions multistage,
+
+docker build -t psych1 .
+docker images
+docker run  -it -p 3000:3000 -p 3001:3333 96f4e41429db
