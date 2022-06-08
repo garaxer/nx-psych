@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import type { Foo } from '@nx-psych/shared-types';
+import { FooDto } from '../dtos/Foo.dto';
+
 @Injectable()
 export class AppService {
-  getData(): Foo {
+  getData(): FooDto {
     return { message: 'Welcome to api!' };
   }
 }
