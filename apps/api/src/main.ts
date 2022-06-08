@@ -3,8 +3,11 @@
  * This is only a minimal backend to get started.
  */
 
+import path from 'path';
+import { writeFileSync } from 'graceful-fs';
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 import { AppModule } from './app/app.module';
 
@@ -13,6 +16,22 @@ async function bootstrap() {
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
   app.enableCors();
+
+  const apiSwaggerOptions = new DocumentBuilder()
+    .setTitle('Nx Psych Api')
+    .setDescription('The API for Nx Psych App')
+    .setVersion('1.0.0')
+    .build();
+
+  const apiSwaggerDocs = SwaggerModule.createDocument(app, apiSwaggerOptions);
+  SwaggerModule.setup('/docs', app, apiSwaggerDocs);
+
+  // create openapi.json
+  const outputPath = path.resolve(process.cwd(), 'openapi.json');
+  writeFileSync(outputPath, JSON.stringify(apiSwaggerDocs, null, 2), {
+    encoding: 'utf8',
+  });
+
   const port = process.env.PORT || 3333;
   await app.listen(port);
   Logger.log(
