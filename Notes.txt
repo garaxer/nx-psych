@@ -2,8 +2,14 @@ Commands ran so far:
 npx nx init
 nx g @nrwl/next:app
 
-nx run api:server
-nx run app:server
+nx run api:serve
+nx run app:serve
+nx run psych:serve
+
 Together you can just run x run
 
 nx g @nrwl/node:lib shared-types
+nx g @nrwl/react:app psych
+
+
+github actions multistage,

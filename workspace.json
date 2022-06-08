@@ -5,6 +5,8 @@
     "api": "apps/api",
     "app": "apps/app",
     "app-e2e": "apps/app-e2e",
+    "psych": "apps/psych",
+    "psych-e2e": "apps/psych-e2e",
     "shared-types": "libs/shared-types"
   }
 }
