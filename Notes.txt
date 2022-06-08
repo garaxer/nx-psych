@@ -1,0 +1,9 @@
+Commands ran so far:
+npx nx init
+nx g @nrwl/next:app
+
+nx run api:server
+nx run app:server
+Together you can just run x run
+
+nx g @nrwl/node:lib shared-types

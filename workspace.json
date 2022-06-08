@@ -2,6 +2,9 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "psych-api": "apps/psych-api"
+    "api": "apps/api",
+    "app": "apps/app",
+    "app-e2e": "apps/app-e2e",
+    "shared-types": "libs/shared-types"
   }
 }
