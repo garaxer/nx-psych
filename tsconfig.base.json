@@ -16,7 +16,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@nx-psych/shared-types": ["libs/shared-types/src/index.ts"]
+      "@nx-psych/shared-types": ["libs/shared-types/src/index.ts"],
+      "@nx-psych/ui": ["libs/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

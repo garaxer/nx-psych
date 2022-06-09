@@ -7,6 +7,8 @@
     "app-e2e": "apps/app-e2e",
     "psych": "apps/psych",
     "psych-e2e": "apps/psych-e2e",
-    "shared-types": "libs/shared-types"
-  }
+    "shared-types": "libs/shared-types",
+    "ui": "libs/ui"
+  },
+  "generatePackageJson": true
 }

@@ -1,6 +1,10 @@
 Commands ran so far:
 npx nx init
 nx g @nrwl/next:app
+nx g @nrwl/react:lib ui
+nx g @nrwl/react:component button --project ui
+
+
 
 nx run api:serve
 nx run app:serve
@@ -17,3 +21,10 @@ github actions multistage,
 docker build -t psych1 .
 docker images
 docker run  -it -p 3000:3000 -p 3001:3333 96f4e41429db
+
+
+todo
+Add authenticaiton (use that mfe app)
+Add nextjs server rendering
+
+

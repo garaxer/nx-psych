@@ -70,6 +70,35 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        appControllerGetDataTwo: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/2`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -87,6 +116,15 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          */
         async appControllerGetData(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FooDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.appControllerGetData(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async appControllerGetDataTwo(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<FooDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.appControllerGetDataTwo(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -107,6 +145,14 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         appControllerGetData(options?: any): AxiosPromise<FooDto> {
             return localVarFp.appControllerGetData(options).then((request) => request(axios, basePath));
         },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        appControllerGetDataTwo(options?: any): AxiosPromise<Array<FooDto>> {
+            return localVarFp.appControllerGetDataTwo(options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -125,6 +171,16 @@ export class DefaultApi extends BaseAPI {
      */
     public appControllerGetData(options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).appControllerGetData(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public appControllerGetDataTwo(options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).appControllerGetDataTwo(options).then((request) => request(this.axios, this.basePath));
     }
 }
 

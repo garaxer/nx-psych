@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { defaultApi } from 'libs/shared-types/src/lib/api/api';
+import { Button } from 'libs/ui/src';
 import { FooDto } from 'libs/shared-types/src/lib/api/generated/api';
 
 const StyledPage = styled.div`
@@ -8,7 +9,7 @@ const StyledPage = styled.div`
   }
 `;
 
-export function Index() {
+export function Index({ q, pokemon }: { q: string; pokemon: FooDto[] }) {
   const [test, setStest] = useState<FooDto>();
 
   useEffect(() => {
@@ -32,8 +33,14 @@ export function Index() {
         <div className="container">
           <div id="welcome">
             <h1>
-              <span> Hello there, {test?.message} </span>
-              Welcome app 👋
+              <span>
+                {' '}
+                Hello there, {test?.message} {q}{' '}
+                {pokemon.map((x, i) => (
+                  <div key={i}>{x.message}</div>
+                ))}{' '}
+              </span>
+              Welcome app 👋 <Button />
             </h1>
           </div>
 
@@ -430,6 +437,22 @@ export function Index() {
       </div>
     </StyledPage>
   );
+}
+
+export async function getServerSideProps(context) {
+  let pokemon: FooDto[] = [];
+
+  if (context.query.q) {
+    const res = await defaultApi.appControllerGetDataTwo();
+    pokemon = res.data;
+  }
+
+  return {
+    props: {
+      q: context.query.q ?? '',
+      pokemon,
+    },
+  };
 }
 
 export default Index;

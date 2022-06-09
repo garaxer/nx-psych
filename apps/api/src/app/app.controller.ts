@@ -12,4 +12,10 @@ export class AppController {
   getData() {
     return this.appService.getData();
   }
+
+  @Get('2')
+  @ApiOkResponse({ type: [FooDto] })
+  getDataTwo() {
+    return [this.appService.getData(), this.appService.getData()];
+  }
 }

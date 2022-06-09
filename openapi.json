@@ -18,6 +18,27 @@
           }
         }
       }
+    },
+    "/api/2": {
+      "get": {
+        "operationId": "AppController_getDataTwo",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FooDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "info": {
