@@ -7,14 +7,17 @@
     "allBuild": "nx run-many --target=build --projects=api,app --parallel",
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "gen-api-client": "sh ./scripts/gen-api-client.sh"
   },
   "private": true,
   "dependencies": {
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/swagger": "^5.2.1",
     "@nrwl/next": "^14.1.9",
+    "@openapitools/openapi-generator-cli": "^2.5.1",
     "concurrently": "^7.2.1",
     "core-js": "^3.6.5",
     "next": "12.1.5",
@@ -26,6 +29,7 @@
     "regenerator-runtime": "0.13.7",
     "rxjs": "^7.0.0",
     "styled-components": "5.3.5",
+    "swagger-ui-express": "^4.4.0",
     "tslib": "^2.3.0"
   },
   "devDependencies": {

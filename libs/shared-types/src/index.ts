@@ -1,5 +1,3 @@
 export * from './lib/shared-types';
-
-export type Foo = {
-  message?: string;
-};
+export * as generated from './lib/api/generated';
+export * as api from './lib/api/api';

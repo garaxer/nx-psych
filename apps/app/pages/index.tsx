@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import type { Foo } from '@nx-psych/shared-types';
+import { defaultApi } from 'libs/shared-types/src/lib/api/api';
+import { FooDto } from 'libs/shared-types/src/lib/api/generated/api';
 
 const StyledPage = styled.div`
   .page {
@@ -8,13 +9,13 @@ const StyledPage = styled.div`
 `;
 
 export function Index() {
-  const [test, setStest] = useState<Foo>();
+  const [test, setStest] = useState<FooDto>();
 
   useEffect(() => {
-    fetch(`http://localhost:3333/api`)
-      .then((resp) => resp.json())
-      .then((data) => setStest(data))
-      .catch((e) => console.log(e));
+    defaultApi
+      .appControllerGetData()
+      .then(({ data }) => setStest(data))
+      .catch((e) => console.error(e));
   }, []);
 
   const foo: { a?: string } = { a: undefined };
