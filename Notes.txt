@@ -4,7 +4,9 @@ nx g @nrwl/next:app
 nx g @nrwl/react:lib ui
 nx g @nrwl/react:component button --project ui
 
-
+yarn add --dev @nrwl/storybook
+nx g @nrwl/react:storybook-configuration ui
+nx run ui:storybook
 
 nx run api:serve
 nx run app:serve
@@ -27,4 +29,16 @@ todo
 Add authenticaiton (use that mfe app)
 Add nextjs server rendering
 
+
+
+Deploying front end to vercel
+npx nx build app -- prod
+dist/apps/apps/.next
+
+Notes:
+https://nx.dev/guides/deploy-nextjs-to-vercel
+https://www.youtube.com/watch?v=WOfL5q2HznI
+https://github.com/ejazahm3d/fullstack-turborepo-starter/tree/master/apps/api
+https://www.cshelton.co.uk/skills-and-experience
+https://github.com/jherr/nextjs-pokemon-modes
 
