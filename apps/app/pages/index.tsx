@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { defaultApi } from 'libs/shared-types/src/lib/api/api';
-import { Button } from 'libs/ui/src';
+import { Button, Shell } from 'libs/ui/src';
 import { FooDto } from 'libs/shared-types/src/lib/api/generated/api';
 import Link from 'next/link';
 
@@ -30,6 +30,7 @@ export function Index({ q, pokemon }: { q: string; pokemon: FooDto[] }) {
    */
   return (
     <StyledPage>
+      <Shell title="Craig's Counselling">Foo</Shell>
       <div className="wrapper">
         <div className="container">
           <div id="welcome">

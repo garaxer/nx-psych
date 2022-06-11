@@ -42,3 +42,5 @@ https://github.com/ejazahm3d/fullstack-turborepo-starter/tree/master/apps/api
 https://www.cshelton.co.uk/skills-and-experience
 https://github.com/jherr/nextjs-pokemon-modes
 
+express api:
+https://github.com/jherr/nx-with-exp-nextjs/tree/master/apps/api
