@@ -371,7 +371,8 @@ export async function getServerSideProps(context) {
   let pokemon: FooDto[] = [];
 
   if (context.query.q) {
-    const res = await defaultApi.appControllerGetDataTwo();
+    const res = await defaultApi.servicesControllerIndex();
+    const foo = res.data[0].;
     pokemon = res.data;
   }
 

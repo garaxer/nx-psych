@@ -39,6 +39,115 @@
           }
         }
       }
+    },
+    "/api/authorized": {
+      "get": {
+        "operationId": "AuthorizedController_index",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/cart": {
+      "get": {
+        "operationId": "CartController_index",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "CartController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "CartController_destroy",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/services": {
+      "get": {
+        "operationId": "ServicesController_index",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ServiceDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/services/{id}": {
+      "get": {
+        "operationId": "ServicesController_show",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceDto"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "info": {
@@ -57,10 +166,30 @@
           "message": {
             "type": "string"
           }
-        },
-        "required": [
-          "message"
-        ]
+        }
+      },
+      "ServiceDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "description": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "longDescription": {
+            "type": "string"
+          }
+        }
       }
     }
   }

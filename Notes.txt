@@ -1,3 +1,7 @@
+todo:
+1. Connect and read from db'
+2. auth
+
 Commands ran so far:
 npx nx init
 nx g @nrwl/next:app
