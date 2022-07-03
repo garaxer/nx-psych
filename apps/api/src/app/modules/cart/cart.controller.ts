@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
 import { Cart, initialCart } from './../../../cart';
-import services from '../../../services';
+import services from '../../../data';
 @Controller('cart')
 export class CartController {
   // TOOD Retrieve from db.

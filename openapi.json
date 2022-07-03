@@ -40,13 +40,50 @@
         }
       }
     },
-    "/api/authorized": {
+    "/api/services": {
       "get": {
-        "operationId": "AuthorizedController_index",
+        "operationId": "ServicesController_index",
         "parameters": [],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ServiceDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/services/{id}": {
+      "get": {
+        "operationId": "ServicesController_show",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceDto"
+                }
+              }
+            }
           }
         }
       }
@@ -101,50 +138,13 @@
         }
       }
     },
-    "/api/services": {
+    "/api/authorized": {
       "get": {
-        "operationId": "ServicesController_index",
+        "operationId": "AuthorizedController_index",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/ServiceDto"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/services/{id}": {
-      "get": {
-        "operationId": "ServicesController_show",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ServiceDto"
-                }
-              }
-            }
+            "description": ""
           }
         }
       }

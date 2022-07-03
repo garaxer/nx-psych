@@ -5,7 +5,7 @@
 
 import path from 'path';
 import { writeFileSync } from 'graceful-fs';
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
@@ -16,6 +16,11 @@ async function bootstrap() {
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
   app.enableCors();
+  app.useGlobalPipes(
+    new ValidationPipe({
+      disableErrorMessages: false,
+    })
+  );
 
   const apiSwaggerOptions = new DocumentBuilder()
     .setTitle('Nx Psych Api')
