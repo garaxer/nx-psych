@@ -1,4 +1,4 @@
-import services, { Service } from './data';
+import { data, Service } from './data';
 
 export interface CartItem extends Service {
   quantity: number;
@@ -10,7 +10,7 @@ export interface Cart {
 
 export const initialCart = (indexes: number[]): Cart => ({
   cartItems: indexes.map((index) => ({
-    ...services[index],
+    ...data.services[index],
     quantity: 1,
   })),
 });

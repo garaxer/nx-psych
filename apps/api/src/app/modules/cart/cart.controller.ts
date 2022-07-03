@@ -9,7 +9,9 @@ import {
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
 import { Cart, initialCart } from './../../../cart';
-import services from '../../../data';
+import { data } from '../../../data';
+const services = data.services;
+
 @Controller('cart')
 export class CartController {
   // TOOD Retrieve from db.
@@ -33,14 +35,12 @@ export class CartController {
     const cart = this.carts[req.user.userId];
     if (!cart)
       return Error('To be implememented, create a new cart for the user');
-    const cartItem = cart.cartItems.find(
-      (cartItem) => cartItem.id === parseInt(id)
-    );
+    const cartItem = cart.cartItems.find((cartItem) => cartItem.id === id);
     if (cartItem) {
       cartItem.quantity += 1;
     } else {
       cart.cartItems.push({
-        ...services.find((service) => service.id === parseInt(id)),
+        ...services.find((service) => service.id === id),
         quantity: 1,
       });
     }

@@ -24,6 +24,43 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 /**
  * 
  * @export
+ * @interface CreateServiceDto
+ */
+export interface CreateServiceDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateServiceDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateServiceDto
+     */
+    'price': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateServiceDto
+     */
+    'description': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateServiceDto
+     */
+    'image': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateServiceDto
+     */
+    'longDescription': string;
+}
+/**
+ * 
+ * @export
  * @interface FooDto
  */
 export interface FooDto {
@@ -32,20 +69,113 @@ export interface FooDto {
      * @type {string}
      * @memberof FooDto
      */
-    'message': string;
+    'message'?: string;
 }
 /**
  * 
  * @export
- * @interface ServiceDto
+ * @interface ServiceResponseDto
  */
-export interface ServiceDto {
+export interface ServiceResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof ServiceResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ServiceResponseDto
+     */
+    'name': string;
     /**
      * 
      * @type {number}
-     * @memberof ServiceDto
+     * @memberof ServiceResponseDto
      */
-    'id': number;
+    'price': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ServiceResponseDto
+     */
+    'description': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ServiceResponseDto
+     */
+    'image': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ServiceResponseDto
+     */
+    'longDescription': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ServiceResponseDto
+     */
+    'created_at': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ServiceResponseDto
+     */
+    'updated_at': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ServiceResponseDto
+     */
+    'type': ServiceResponseDtoTypeEnum;
+}
+
+export const ServiceResponseDtoTypeEnum = {
+    Remote: 'remote',
+    Inperson: 'inperson'
+} as const;
+
+export type ServiceResponseDtoTypeEnum = typeof ServiceResponseDtoTypeEnum[keyof typeof ServiceResponseDtoTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface UpdateServiceDto
+ */
+export interface UpdateServiceDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateServiceDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdateServiceDto
+     */
+    'price': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateServiceDto
+     */
+    'description': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateServiceDto
+     */
+    'image': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateServiceDto
+     */
+    'longDescription': string;
 }
 
 /**
@@ -230,11 +360,91 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @param {string} type 
+         * @param {CreateServiceDto} createServiceDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        servicesControllerIndex: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/services`;
+        servicesControllerCreateReport: async (type: string, createServiceDto: CreateServiceDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('servicesControllerCreateReport', 'type', type)
+            // verify required parameter 'createServiceDto' is not null or undefined
+            assertParamExists('servicesControllerCreateReport', 'createServiceDto', createServiceDto)
+            const localVarPath = `/api/services/{type}`
+                .replace(`{${"type"}}`, encodeURIComponent(String(type)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createServiceDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} type 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        servicesControllerDeleteReport: async (id: string, type: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('servicesControllerDeleteReport', 'id', id)
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('servicesControllerDeleteReport', 'type', type)
+            const localVarPath = `/api/services/{type}/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)))
+                .replace(`{${"type"}}`, encodeURIComponent(String(type)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        servicesControllerGetAllReports: async (type: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('servicesControllerGetAllReports', 'type', type)
+            const localVarPath = `/api/services/{type}`
+                .replace(`{${"type"}}`, encodeURIComponent(String(type)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -260,13 +470,87 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @param {string} id 
+         * @param {string} type 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        servicesControllerShow: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        servicesControllerGetReportById: async (id: string, type: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('servicesControllerGetReportById', 'id', id)
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('servicesControllerGetReportById', 'type', type)
+            const localVarPath = `/api/services/{type}/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)))
+                .replace(`{${"type"}}`, encodeURIComponent(String(type)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        servicesControllerIndex: async (type: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('servicesControllerIndex', 'type', type)
+            const localVarPath = `/api/services/{type}/foo`
+                .replace(`{${"type"}}`, encodeURIComponent(String(type)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        servicesControllerShow: async (type: string, id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('servicesControllerShow', 'type', type)
             // verify required parameter 'id' is not null or undefined
             assertParamExists('servicesControllerShow', 'id', id)
-            const localVarPath = `/api/services/{id}`
+            const localVarPath = `/api/services/{type}/foo{id}`
+                .replace(`{${"type"}}`, encodeURIComponent(String(type)))
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -284,6 +568,49 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {string} id 
+         * @param {UpdateServiceDto} updateServiceDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        servicesControllerUpdateReport: async (type: string, id: string, updateServiceDto: UpdateServiceDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('servicesControllerUpdateReport', 'type', type)
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('servicesControllerUpdateReport', 'id', id)
+            // verify required parameter 'updateServiceDto' is not null or undefined
+            assertParamExists('servicesControllerUpdateReport', 'updateServiceDto', updateServiceDto)
+            const localVarPath = `/api/services/{type}/{id}`
+                .replace(`{${"type"}}`, encodeURIComponent(String(type)))
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateServiceDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -332,7 +659,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async cartControllerCreate(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async cartControllerCreate(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.cartControllerCreate(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -341,7 +668,7 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async cartControllerDestroy(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async cartControllerDestroy(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.cartControllerDestroy(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -350,27 +677,84 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async cartControllerIndex(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async cartControllerIndex(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.cartControllerIndex(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
+         * @param {string} type 
+         * @param {CreateServiceDto} createServiceDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async servicesControllerIndex(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ServiceDto>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.servicesControllerIndex(options);
+        async servicesControllerCreateReport(type: string, createServiceDto: CreateServiceDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.servicesControllerCreateReport(type, createServiceDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {string} id 
+         * @param {string} type 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async servicesControllerShow(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.servicesControllerShow(id, options);
+        async servicesControllerDeleteReport(id: string, type: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.servicesControllerDeleteReport(id, type, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async servicesControllerGetAllReports(type: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ServiceResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.servicesControllerGetAllReports(type, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} type 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async servicesControllerGetReportById(id: string, type: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.servicesControllerGetReportById(id, type, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async servicesControllerIndex(type: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ServiceResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.servicesControllerIndex(type, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async servicesControllerShow(type: string, id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.servicesControllerShow(type, id, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {string} id 
+         * @param {UpdateServiceDto} updateServiceDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async servicesControllerUpdateReport(type: string, id: string, updateServiceDto: UpdateServiceDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.servicesControllerUpdateReport(type, id, updateServiceDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -412,7 +796,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cartControllerCreate(options?: any): AxiosPromise<void> {
+        cartControllerCreate(options?: any): AxiosPromise<object> {
             return localVarFp.cartControllerCreate(options).then((request) => request(axios, basePath));
         },
         /**
@@ -420,7 +804,7 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cartControllerDestroy(options?: any): AxiosPromise<void> {
+        cartControllerDestroy(options?: any): AxiosPromise<object> {
             return localVarFp.cartControllerDestroy(options).then((request) => request(axios, basePath));
         },
         /**
@@ -428,28 +812,171 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cartControllerIndex(options?: any): AxiosPromise<void> {
+        cartControllerIndex(options?: any): AxiosPromise<object> {
             return localVarFp.cartControllerIndex(options).then((request) => request(axios, basePath));
         },
         /**
          * 
+         * @param {string} type 
+         * @param {CreateServiceDto} createServiceDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        servicesControllerIndex(options?: any): AxiosPromise<Array<ServiceDto>> {
-            return localVarFp.servicesControllerIndex(options).then((request) => request(axios, basePath));
+        servicesControllerCreateReport(type: string, createServiceDto: CreateServiceDto, options?: any): AxiosPromise<ServiceResponseDto> {
+            return localVarFp.servicesControllerCreateReport(type, createServiceDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {string} id 
+         * @param {string} type 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        servicesControllerShow(id: string, options?: any): AxiosPromise<ServiceDto> {
-            return localVarFp.servicesControllerShow(id, options).then((request) => request(axios, basePath));
+        servicesControllerDeleteReport(id: string, type: string, options?: any): AxiosPromise<void> {
+            return localVarFp.servicesControllerDeleteReport(id, type, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        servicesControllerGetAllReports(type: string, options?: any): AxiosPromise<Array<ServiceResponseDto>> {
+            return localVarFp.servicesControllerGetAllReports(type, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} type 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        servicesControllerGetReportById(id: string, type: string, options?: any): AxiosPromise<ServiceResponseDto> {
+            return localVarFp.servicesControllerGetReportById(id, type, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        servicesControllerIndex(type: string, options?: any): AxiosPromise<Array<ServiceResponseDto>> {
+            return localVarFp.servicesControllerIndex(type, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        servicesControllerShow(type: string, id: string, options?: any): AxiosPromise<ServiceResponseDto> {
+            return localVarFp.servicesControllerShow(type, id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {string} id 
+         * @param {UpdateServiceDto} updateServiceDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        servicesControllerUpdateReport(type: string, id: string, updateServiceDto: UpdateServiceDto, options?: any): AxiosPromise<ServiceResponseDto> {
+            return localVarFp.servicesControllerUpdateReport(type, id, updateServiceDto, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for servicesControllerCreateReport operation in DefaultApi.
+ * @export
+ * @interface DefaultApiServicesControllerCreateReportRequest
+ */
+export interface DefaultApiServicesControllerCreateReportRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof DefaultApiServicesControllerCreateReport
+     */
+    readonly type: string
+
+    /**
+     * 
+     * @type {CreateServiceDto}
+     * @memberof DefaultApiServicesControllerCreateReport
+     */
+    readonly createServiceDto: CreateServiceDto
+}
+
+/**
+ * Request parameters for servicesControllerDeleteReport operation in DefaultApi.
+ * @export
+ * @interface DefaultApiServicesControllerDeleteReportRequest
+ */
+export interface DefaultApiServicesControllerDeleteReportRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof DefaultApiServicesControllerDeleteReport
+     */
+    readonly id: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof DefaultApiServicesControllerDeleteReport
+     */
+    readonly type: string
+}
+
+/**
+ * Request parameters for servicesControllerGetAllReports operation in DefaultApi.
+ * @export
+ * @interface DefaultApiServicesControllerGetAllReportsRequest
+ */
+export interface DefaultApiServicesControllerGetAllReportsRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof DefaultApiServicesControllerGetAllReports
+     */
+    readonly type: string
+}
+
+/**
+ * Request parameters for servicesControllerGetReportById operation in DefaultApi.
+ * @export
+ * @interface DefaultApiServicesControllerGetReportByIdRequest
+ */
+export interface DefaultApiServicesControllerGetReportByIdRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof DefaultApiServicesControllerGetReportById
+     */
+    readonly id: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof DefaultApiServicesControllerGetReportById
+     */
+    readonly type: string
+}
+
+/**
+ * Request parameters for servicesControllerIndex operation in DefaultApi.
+ * @export
+ * @interface DefaultApiServicesControllerIndexRequest
+ */
+export interface DefaultApiServicesControllerIndexRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof DefaultApiServicesControllerIndex
+     */
+    readonly type: string
+}
 
 /**
  * Request parameters for servicesControllerShow operation in DefaultApi.
@@ -462,7 +989,42 @@ export interface DefaultApiServicesControllerShowRequest {
      * @type {string}
      * @memberof DefaultApiServicesControllerShow
      */
+    readonly type: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof DefaultApiServicesControllerShow
+     */
     readonly id: string
+}
+
+/**
+ * Request parameters for servicesControllerUpdateReport operation in DefaultApi.
+ * @export
+ * @interface DefaultApiServicesControllerUpdateReportRequest
+ */
+export interface DefaultApiServicesControllerUpdateReportRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof DefaultApiServicesControllerUpdateReport
+     */
+    readonly type: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof DefaultApiServicesControllerUpdateReport
+     */
+    readonly id: string
+
+    /**
+     * 
+     * @type {UpdateServiceDto}
+     * @memberof DefaultApiServicesControllerUpdateReport
+     */
+    readonly updateServiceDto: UpdateServiceDto
 }
 
 /**
@@ -534,12 +1096,57 @@ export class DefaultApi extends BaseAPI {
 
     /**
      * 
+     * @param {DefaultApiServicesControllerCreateReportRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public servicesControllerIndex(options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).servicesControllerIndex(options).then((request) => request(this.axios, this.basePath));
+    public servicesControllerCreateReport(requestParameters: DefaultApiServicesControllerCreateReportRequest, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).servicesControllerCreateReport(requestParameters.type, requestParameters.createServiceDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {DefaultApiServicesControllerDeleteReportRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public servicesControllerDeleteReport(requestParameters: DefaultApiServicesControllerDeleteReportRequest, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).servicesControllerDeleteReport(requestParameters.id, requestParameters.type, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {DefaultApiServicesControllerGetAllReportsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public servicesControllerGetAllReports(requestParameters: DefaultApiServicesControllerGetAllReportsRequest, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).servicesControllerGetAllReports(requestParameters.type, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {DefaultApiServicesControllerGetReportByIdRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public servicesControllerGetReportById(requestParameters: DefaultApiServicesControllerGetReportByIdRequest, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).servicesControllerGetReportById(requestParameters.id, requestParameters.type, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {DefaultApiServicesControllerIndexRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public servicesControllerIndex(requestParameters: DefaultApiServicesControllerIndexRequest, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).servicesControllerIndex(requestParameters.type, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -550,7 +1157,18 @@ export class DefaultApi extends BaseAPI {
      * @memberof DefaultApi
      */
     public servicesControllerShow(requestParameters: DefaultApiServicesControllerShowRequest, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).servicesControllerShow(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+        return DefaultApiFp(this.configuration).servicesControllerShow(requestParameters.type, requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {DefaultApiServicesControllerUpdateReportRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public servicesControllerUpdateReport(requestParameters: DefaultApiServicesControllerUpdateReportRequest, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).servicesControllerUpdateReport(requestParameters.type, requestParameters.id, requestParameters.updateServiceDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -1,6 +1,6 @@
 export enum ServiceType {
   REMOTE = 'remote',
-  INPERSON = 'in person',
+  INPERSON = 'inperson',
 }
 
 export interface Service {
@@ -18,7 +18,7 @@ export interface Service {
 export const data: { services: Service[] } = {
   services: [
     {
-      id: "1",
+      id: '1',
       name: 'Wheel Spinner',
       price: 5.99,
       description: 'A wheel fidget spinner that spins wheels',
@@ -28,7 +28,7 @@ export const data: { services: Service[] } = {
       type: ServiceType.INPERSON,
     },
     {
-      id: "2",
+      id: '2',
       name: 'Solid Rainbow',
       price: 8.99,
       description: 'A solid steel of rainbow fidget spinning goodness.',
@@ -38,7 +38,7 @@ export const data: { services: Service[] } = {
       type: ServiceType.INPERSON,
     },
     {
-      id: "3",
+      id: '3',
       name: 'Dragon Spinner',
       price: 7.99,
       description: 'A winged dragon of a spinner.',
@@ -48,7 +48,7 @@ export const data: { services: Service[] } = {
       type: ServiceType.INPERSON,
     },
     {
-      id: "5",
+      id: '5',
       name: 'Rainbow Flames',
       price: 7.99,
       description: 'Flaming rainbow fun for all ages.',
@@ -58,7 +58,7 @@ export const data: { services: Service[] } = {
       type: ServiceType.INPERSON,
     },
     {
-      id: "6",
+      id: '6',
       name: 'Jammin Spinner',
       price: 6.99,
       description: 'Jammin this rainbow inspired spinner is so much fun!',
@@ -68,7 +68,7 @@ export const data: { services: Service[] } = {
       type: ServiceType.INPERSON,
     },
     {
-      id: "7",
+      id: '7',
       name: 'Goldy-spinner',
       price: 8.99,
       description: 'So golden, so spinny! Classic and beautiful.',
@@ -78,7 +78,7 @@ export const data: { services: Service[] } = {
       type: ServiceType.INPERSON,
     },
     {
-      id: "8",
+      id: '8',
       name: 'Golden pointers',
       price: 7.99,
       description: 'Beautiful pointed golden spinner with jade highlights.',
@@ -88,7 +88,7 @@ export const data: { services: Service[] } = {
       type: ServiceType.INPERSON,
     },
     {
-      id: "9",
+      id: '9',
       name: 'Rainbow Hearts',
       price: 8.99,
       description: "So much love in a spinner, it's all rainbows and hearts.",
@@ -98,7 +98,7 @@ export const data: { services: Service[] } = {
       type: ServiceType.INPERSON,
     },
     {
-      id: "1"0,
+      id: '10',
       name: 'Gold and Silver Gears',
       price: 9.99,
       description: 'Sleek and beautiful, this spinner is so fast.',
@@ -108,7 +108,7 @@ export const data: { services: Service[] } = {
       type: ServiceType.INPERSON,
     },
     {
-      id: "1"1,
+      id: '11',
       name: 'Gears Within Gears',
       price: 12.99,
       description:

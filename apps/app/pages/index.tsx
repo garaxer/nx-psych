@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { defaultApi } from 'libs/shared-types/src/lib/api/api';
 import { Button, Shell } from 'libs/ui/src';
-import { FooDto } from 'libs/shared-types/src/lib/api/generated/api';
+import { defaultApi } from 'libs/shared-types/src/lib/api/api';
+import {
+  ServiceResponseDto,
+  ServiceResponseDtoTypeEnum,
+} from 'libs/shared-types/src/lib/api/generated/api';
 import Link from 'next/link';
 
 const StyledPage = styled.div`
@@ -10,42 +12,35 @@ const StyledPage = styled.div`
   }
 `;
 
-export function Index({ q, pokemon }: { q: string; pokemon: FooDto[] }) {
-  const [test, setStest] = useState<FooDto>();
+export function Index({
+  q,
+  services,
+}: {
+  q: string;
+  services: ServiceResponseDto[];
+}) {
+  console.log(services);
 
-  useEffect(() => {
-    defaultApi
-      .appControllerGetData()
-      .then(({ data }) => setStest(data))
-      .catch((e) => console.error(e));
-  }, []);
-
-  const foo: { a?: string } = { a: undefined };
-  console.log(foo?.a ?? foo.a?.toString());
-
-  /*
-   * Replace the elements below with your own.
-   *
-   * Note: The corresponding styles are in the ./index.styled-components file.
-   */
   return (
     <StyledPage>
-      <Shell title="Craig's Counselling">Foo</Shell>
+      <Shell title="Craig's Counselling">
+        <Link href="/services/1">Services 1</Link>
+        <Link href="/booking">Booking</Link>
+        <Link href="/about">About</Link>
+        <Button />
+      </Shell>
       <div className="wrapper">
         <div className="container">
           <div id="welcome">
             <h1>
               <span>
                 {' '}
-                Testing: , {test?.message} {q}{' '}
-                {pokemon.map((x, i) => (
-                  <div key={i}>{x.message}</div>
+                Testing 2:
+                {services.map((x, i) => (
+                  <div key={i}>{x.description}</div>
                 ))}{' '}
               </span>
-              Welcome app 👋 <Button />
-              <Link href="/services/1">Services 1</Link>
-              <Link href="/booking">Booking</Link>
-              <Link href="/about">About</Link>
+              Welcome app 👋
             </h1>
           </div>
 
@@ -368,18 +363,24 @@ export function Index({ q, pokemon }: { q: string; pokemon: FooDto[] }) {
 }
 
 export async function getServerSideProps(context) {
-  let pokemon: FooDto[] = [];
+  let services: ServiceResponseDto[] = [];
 
-  if (context.query.q) {
-    const res = await defaultApi.servicesControllerIndex();
-    const foo = res.data[0].;
-    pokemon = res.data;
+  try {
+    if (context.query.q) {
+      const res = await defaultApi.servicesControllerGetAllReports({
+        type: ServiceResponseDtoTypeEnum.Inperson,
+      });
+      services = res.data;
+    }
+  } catch (error) {
+    console.log('Error connecting to server 1');
+    console.log(error);
   }
 
   return {
     props: {
       q: context.query.q ?? '',
-      pokemon,
+      services,
     },
   };
 }
