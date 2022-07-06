@@ -5,6 +5,7 @@
   "scripts": {
     "all": "nx run-many --parallel --target=serve --projects=app,api",
     "allBuild": "nx run-many --target=build --projects=api,app --parallel",
+    "storybook": "nx run ui:storybook",
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
@@ -13,8 +14,11 @@
   },
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
     "@mantine/core": "^4.2.8",
     "@mantine/hooks": "^4.2.8",
+    "@mui/material": "^5.8.7",
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/jwt": "^8.0.1",
@@ -41,6 +45,7 @@
     "rxjs": "^7.0.0",
     "styled-components": "5.3.5",
     "swagger-ui-express": "^4.4.0",
+    "tabler-icons-react": "^1.52.0",
     "tslib": "^2.3.0"
   },
   "devDependencies": {

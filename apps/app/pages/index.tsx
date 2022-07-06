@@ -1,44 +1,99 @@
+import { Home, Messages, Album } from 'tabler-icons-react';
+import Link from 'next/link';
 import styled from 'styled-components';
-import { Button, Shell } from 'libs/ui/src';
+import { Container, Group } from '@mantine/core';
+import { Button, Shell, Menus } from 'libs/ui/src';
 import { defaultApi } from 'libs/shared-types/src/lib/api/api';
 import {
   ServiceResponseDto,
   ServiceResponseDtoTypeEnum,
 } from 'libs/shared-types/src/lib/api/generated/api';
-import Link from 'next/link';
-
+import withProvider from '../context/withProvider';
+import {
+  UserProvider,
+  useUserState,
+  useUserDispatch,
+  userActions,
+} from '../context/UserContext';
+import { ReactElement, useEffect } from 'react';
+// Local
 const StyledPage = styled.div`
   .page {
+    width: 100%;
   }
 `;
 
-export function Index({
+type ServicesProps = {
+  services: ServiceResponseDto[];
+  children: (service: ServiceResponseDto) => ReactElement;
+};
+
+const Services = ({ services, children, ...props }: ServicesProps) => {
+  return (
+    <Group spacing="xl" {...props}>
+      {(services || []).map((service) => {
+        return <div key={service.id}>{children(service)}</div>;
+      })}
+    </Group>
+  );
+};
+
+// Put these somewhere
+const links = [
+  { icon: <Home size={16} />, color: 'teal', label: 'Open Issues' },
+  { icon: <Messages size={16} />, color: 'violet', label: 'Discussions' },
+  { icon: <Album size={16} />, color: 'grape', label: 'Databases' },
+];
+
+const Index = ({
   q,
   services,
 }: {
   q: string;
   services: ServiceResponseDto[];
-}) {
+}) => {
   console.log(services);
+
+  const userDispatch = useUserDispatch();
+  const { state, isLoggedIn } = useUserState();
+
+  useEffect(() => {
+    void userActions.getUserProfile(userDispatch);
+  }, [userDispatch]);
 
   return (
     <StyledPage>
-      <Shell title="Craig's Counselling">
-        <Link href="/services/1">Services 1</Link>
-        <Link href="/booking">Booking</Link>
-        <Link href="/about">About</Link>
-        <Button />
-      </Shell>
-      <div className="wrapper">
+      <Shell
+        title="Craig's Counselling"
+        username={state?.identity?.name ?? ''}
+        nav={
+          <div>
+            <Menus size={'medium'}>
+              {links.map((link) => (
+                <Link href="/services/1" key={link.label} passHref>
+                  <Menus.MenuItem {...link} key={link.label} />
+                </Link>
+              ))}
+            </Menus>
+          </div>
+        }
+      >
+        <Container>
+          <Link href="/services/1">Services 1</Link>
+          <Link href="/booking">Booking</Link>
+          <Link href="/about">About</Link>
+          <Button />
+        </Container>
         <div className="container">
           <div id="welcome">
             <h1>
               <span>
-                {' '}
                 Testing 2:
-                {services.map((x, i) => (
-                  <div key={i}>{x.description}</div>
-                ))}{' '}
+                <Services services={services}>
+                  {(service) => (
+                    <Link href={`services/${service.id}`}>{service.name}</Link>
+                  )}
+                </Services>
               </span>
               Welcome app 👋
             </h1>
@@ -357,10 +412,10 @@ export function Index({
 
           <p id="love">Created by Gary</p>
         </div>
-      </div>
+      </Shell>
     </StyledPage>
   );
-}
+};
 
 export async function getServerSideProps(context) {
   let services: ServiceResponseDto[] = [];
@@ -385,4 +440,4 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default Index;
+export default withProvider(UserProvider)(Index);
