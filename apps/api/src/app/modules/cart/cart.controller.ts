@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
 import { Cart, initialCart } from './../../../cart';
-import { data } from '../../../data';
+import { data } from '../../../service';
 const services = data.services;
 
 @Controller('cart')

@@ -48,3 +48,10 @@ https://github.com/jherr/nextjs-pokemon-modes
 
 express api:
 https://github.com/jherr/nx-with-exp-nextjs/tree/master/apps/api
+
+
+
+
+npm run all
+
+anytime you change the backend types, re run openapi

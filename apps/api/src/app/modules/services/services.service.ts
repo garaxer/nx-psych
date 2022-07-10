@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ServiceResponseDto } from '../../../dtos/service.dto';
-import { data, ServiceType } from '../../../data';
+import { data, ServiceType } from '../../../service';
 import { v4 as uuid } from 'uuid';
 
 interface Report {

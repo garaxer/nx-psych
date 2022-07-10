@@ -1,4 +1,4 @@
-import { data, Service } from './data';
+import { data, Service } from './service';
 
 export interface CartItem extends Service {
   quantity: number;

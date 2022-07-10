@@ -31,7 +31,6 @@ export class ServicesController {
   @Get('foo')
   @ApiOkResponse({ type: [ServiceResponseDto] })
   async index(
-    @Param('id', ParseUUIDPipe) id: string,
     @Param('type', new ParseEnumPipe(ServiceType)) _: ServiceType
   ): Promise<ServiceResponseDto[]> {
     return data.services.map((x) => new ServiceResponseDto(x));
@@ -49,7 +48,6 @@ export class ServicesController {
   @Get()
   @ApiOkResponse({ type: [ServiceResponseDto] })
   getAllReports(
-    @Param('id', ParseUUIDPipe) id: string,
     @Param('type', new ParseEnumPipe(ServiceType)) type: ServiceType
   ): ServiceResponseDto[] {
     return this.reportService.getAllReports(type);
@@ -68,7 +66,6 @@ export class ServicesController {
   @ApiOkResponse({ type: ServiceResponseDto })
   createReport(
     @Body() body: CreateServiceDto,
-    @Param('id', ParseUUIDPipe) id: string,
     @Param('type', new ParseEnumPipe(ServiceType)) type: ServiceType
   ): ServiceResponseDto {
     return this.reportService.createReport(type, body);

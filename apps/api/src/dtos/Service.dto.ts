@@ -18,7 +18,7 @@ import {
   IsOptional,
 } from 'class-validator';
 import { Exclude, Expose } from 'class-transformer';
-import { ServiceType } from '../data';
+import { ServiceType } from '../service';
 
 export class CreateServiceDto {
   @IsString()
