@@ -6,7 +6,12 @@ import {
   IsOptional,
   IsDate,
 } from 'class-validator';
-import { BookingType } from '../booking';
+
+// Work out why this can't be imported from booking
+export enum BookingType {
+  REMOTE = 'remote',
+  INPERSON = 'inperson',
+}
 
 export class CreateBookingDto {
   @IsString()

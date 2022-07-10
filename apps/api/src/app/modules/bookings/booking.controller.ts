@@ -18,7 +18,7 @@ import {
 } from '../../../dtos/booking.dto';
 import { ApiOkResponse } from '@nestjs/swagger';
 import { BookingService } from './booking.service';
-import { data, BookingType } from '../../../booking';
+import { BookingType } from '../../../booking';
 import { Permissions } from '../../../permissions.decorator';
 import { PermissionsGuard } from '../../../permissions.guard';
 import { AuthGuard } from '@nestjs/passport';
@@ -27,23 +27,6 @@ import { AuthGuard } from '@nestjs/passport';
 export class BookingController {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor(private readonly reportService: BookingService) {}
-
-  @Get('foo')
-  @ApiOkResponse({ type: [BookingResponseDto] })
-  async index(
-    @Param('type', new ParseEnumPipe(BookingType)) _: BookingType
-  ): Promise<BookingResponseDto[]> {
-    return data.bookings.map((x) => new BookingResponseDto(x));
-  }
-
-  @Get('foo:id')
-  @ApiOkResponse({ type: BookingResponseDto })
-  async show(
-    @Param('type', new ParseEnumPipe(BookingType)) _: BookingType,
-    @Param('id') id: string
-  ): Promise<BookingResponseDto> {
-    return new BookingResponseDto(data.bookings.find((s) => s.id === id));
-  }
 
   @Get()
   @ApiOkResponse({ type: [BookingResponseDto] })
@@ -89,7 +72,7 @@ export class BookingController {
   deleteReport(
     @Param('id', ParseUUIDPipe) id: string,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    @Param('type') _
+    @Param('type', new ParseEnumPipe(BookingType)) type: BookingType
   ): void {
     return this.reportService.deleteReport(id);
   }

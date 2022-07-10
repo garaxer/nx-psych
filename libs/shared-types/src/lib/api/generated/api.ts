@@ -24,6 +24,156 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 /**
  * 
  * @export
+ * @interface BookingResponseDto
+ */
+export interface BookingResponseDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof BookingResponseDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BookingResponseDto
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BookingResponseDto
+     */
+    'date': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof BookingResponseDto
+     */
+    'duration': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof BookingResponseDto
+     */
+    'description': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BookingResponseDto
+     */
+    'category': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof BookingResponseDto
+     */
+    'price': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof BookingResponseDto
+     */
+    'location': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BookingResponseDto
+     */
+    'created_at'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BookingResponseDto
+     */
+    'updated_at'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BookingResponseDto
+     */
+    'type': BookingResponseDtoTypeEnum;
+}
+
+export const BookingResponseDtoTypeEnum = {
+    Remote: 'remote',
+    Inperson: 'inperson'
+} as const;
+
+export type BookingResponseDtoTypeEnum = typeof BookingResponseDtoTypeEnum[keyof typeof BookingResponseDtoTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface CreateBookingDto
+ */
+export interface CreateBookingDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateBookingDto
+     */
+    'id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateBookingDto
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateBookingDto
+     */
+    'date': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateBookingDto
+     */
+    'duration': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateBookingDto
+     */
+    'description': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateBookingDto
+     */
+    'category': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateBookingDto
+     */
+    'price': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateBookingDto
+     */
+    'location': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateBookingDto
+     */
+    'type': CreateBookingDtoTypeEnum;
+}
+
+export const CreateBookingDtoTypeEnum = {
+    Remote: 'remote',
+    Inperson: 'inperson'
+} as const;
+
+export type CreateBookingDtoTypeEnum = typeof CreateBookingDtoTypeEnum[keyof typeof CreateBookingDtoTypeEnum];
+
+/**
+ * 
+ * @export
  * @interface CreateServiceDto
  */
 export interface CreateServiceDto {
@@ -139,6 +289,69 @@ export const ServiceResponseDtoTypeEnum = {
 } as const;
 
 export type ServiceResponseDtoTypeEnum = typeof ServiceResponseDtoTypeEnum[keyof typeof ServiceResponseDtoTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface UpdateBookingDto
+ */
+export interface UpdateBookingDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateBookingDto
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateBookingDto
+     */
+    'date': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdateBookingDto
+     */
+    'duration': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateBookingDto
+     */
+    'description': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateBookingDto
+     */
+    'category': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdateBookingDto
+     */
+    'price': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateBookingDto
+     */
+    'location': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateBookingDto
+     */
+    'type': UpdateBookingDtoTypeEnum;
+}
+
+export const UpdateBookingDtoTypeEnum = {
+    Remote: 'remote',
+    Inperson: 'inperson'
+} as const;
+
+export type UpdateBookingDtoTypeEnum = typeof UpdateBookingDtoTypeEnum[keyof typeof UpdateBookingDtoTypeEnum];
 
 /**
  * 
@@ -273,6 +486,195 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @param {string} type 
+         * @param {CreateBookingDto} createBookingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bookingControllerCreateReport: async (type: string, createBookingDto: CreateBookingDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('bookingControllerCreateReport', 'type', type)
+            // verify required parameter 'createBookingDto' is not null or undefined
+            assertParamExists('bookingControllerCreateReport', 'createBookingDto', createBookingDto)
+            const localVarPath = `/api/booking/{type}`
+                .replace(`{${"type"}}`, encodeURIComponent(String(type)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createBookingDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} type 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bookingControllerDeleteReport: async (id: string, type: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('bookingControllerDeleteReport', 'id', id)
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('bookingControllerDeleteReport', 'type', type)
+            const localVarPath = `/api/booking/{type}/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)))
+                .replace(`{${"type"}}`, encodeURIComponent(String(type)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bookingControllerGetAllReports: async (type: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('bookingControllerGetAllReports', 'type', type)
+            const localVarPath = `/api/booking/{type}`
+                .replace(`{${"type"}}`, encodeURIComponent(String(type)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} type 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bookingControllerGetReportById: async (id: string, type: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('bookingControllerGetReportById', 'id', id)
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('bookingControllerGetReportById', 'type', type)
+            const localVarPath = `/api/booking/{type}/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)))
+                .replace(`{${"type"}}`, encodeURIComponent(String(type)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {string} id 
+         * @param {UpdateBookingDto} updateBookingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bookingControllerUpdateReport: async (type: string, id: string, updateBookingDto: UpdateBookingDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'type' is not null or undefined
+            assertParamExists('bookingControllerUpdateReport', 'type', type)
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('bookingControllerUpdateReport', 'id', id)
+            // verify required parameter 'updateBookingDto' is not null or undefined
+            assertParamExists('bookingControllerUpdateReport', 'updateBookingDto', updateBookingDto)
+            const localVarPath = `/api/booking/{type}/{id}`
+                .replace(`{${"type"}}`, encodeURIComponent(String(type)))
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateBookingDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -360,17 +762,21 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @param {string} id 
          * @param {string} type 
          * @param {CreateServiceDto} createServiceDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        servicesControllerCreateReport: async (type: string, createServiceDto: CreateServiceDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        servicesControllerCreateReport: async (id: string, type: string, createServiceDto: CreateServiceDto, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('servicesControllerCreateReport', 'id', id)
             // verify required parameter 'type' is not null or undefined
             assertParamExists('servicesControllerCreateReport', 'type', type)
             // verify required parameter 'createServiceDto' is not null or undefined
             assertParamExists('servicesControllerCreateReport', 'createServiceDto', createServiceDto)
             const localVarPath = `/api/services/{type}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)))
                 .replace(`{${"type"}}`, encodeURIComponent(String(type)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -656,6 +1062,61 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} type 
+         * @param {CreateBookingDto} createBookingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bookingControllerCreateReport(type: string, createBookingDto: CreateBookingDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BookingResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bookingControllerCreateReport(type, createBookingDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} type 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bookingControllerDeleteReport(id: string, type: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bookingControllerDeleteReport(id, type, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bookingControllerGetAllReports(type: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<BookingResponseDto>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bookingControllerGetAllReports(type, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} type 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bookingControllerGetReportById(id: string, type: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BookingResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bookingControllerGetReportById(id, type, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {string} id 
+         * @param {UpdateBookingDto} updateBookingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async bookingControllerUpdateReport(type: string, id: string, updateBookingDto: UpdateBookingDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BookingResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.bookingControllerUpdateReport(type, id, updateBookingDto, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -683,13 +1144,14 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} id 
          * @param {string} type 
          * @param {CreateServiceDto} createServiceDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async servicesControllerCreateReport(type: string, createServiceDto: CreateServiceDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceResponseDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.servicesControllerCreateReport(type, createServiceDto, options);
+        async servicesControllerCreateReport(id: string, type: string, createServiceDto: CreateServiceDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceResponseDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.servicesControllerCreateReport(id, type, createServiceDto, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -793,6 +1255,56 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @param {string} type 
+         * @param {CreateBookingDto} createBookingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bookingControllerCreateReport(type: string, createBookingDto: CreateBookingDto, options?: any): AxiosPromise<BookingResponseDto> {
+            return localVarFp.bookingControllerCreateReport(type, createBookingDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} type 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bookingControllerDeleteReport(id: string, type: string, options?: any): AxiosPromise<void> {
+            return localVarFp.bookingControllerDeleteReport(id, type, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bookingControllerGetAllReports(type: string, options?: any): AxiosPromise<Array<BookingResponseDto>> {
+            return localVarFp.bookingControllerGetAllReports(type, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} id 
+         * @param {string} type 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bookingControllerGetReportById(id: string, type: string, options?: any): AxiosPromise<BookingResponseDto> {
+            return localVarFp.bookingControllerGetReportById(id, type, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} type 
+         * @param {string} id 
+         * @param {UpdateBookingDto} updateBookingDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        bookingControllerUpdateReport(type: string, id: string, updateBookingDto: UpdateBookingDto, options?: any): AxiosPromise<BookingResponseDto> {
+            return localVarFp.bookingControllerUpdateReport(type, id, updateBookingDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -817,13 +1329,14 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @param {string} id 
          * @param {string} type 
          * @param {CreateServiceDto} createServiceDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        servicesControllerCreateReport(type: string, createServiceDto: CreateServiceDto, options?: any): AxiosPromise<ServiceResponseDto> {
-            return localVarFp.servicesControllerCreateReport(type, createServiceDto, options).then((request) => request(axios, basePath));
+        servicesControllerCreateReport(id: string, type: string, createServiceDto: CreateServiceDto, options?: any): AxiosPromise<ServiceResponseDto> {
+            return localVarFp.servicesControllerCreateReport(id, type, createServiceDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -888,11 +1401,123 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
 };
 
 /**
+ * Request parameters for bookingControllerCreateReport operation in DefaultApi.
+ * @export
+ * @interface DefaultApiBookingControllerCreateReportRequest
+ */
+export interface DefaultApiBookingControllerCreateReportRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof DefaultApiBookingControllerCreateReport
+     */
+    readonly type: string
+
+    /**
+     * 
+     * @type {CreateBookingDto}
+     * @memberof DefaultApiBookingControllerCreateReport
+     */
+    readonly createBookingDto: CreateBookingDto
+}
+
+/**
+ * Request parameters for bookingControllerDeleteReport operation in DefaultApi.
+ * @export
+ * @interface DefaultApiBookingControllerDeleteReportRequest
+ */
+export interface DefaultApiBookingControllerDeleteReportRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof DefaultApiBookingControllerDeleteReport
+     */
+    readonly id: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof DefaultApiBookingControllerDeleteReport
+     */
+    readonly type: string
+}
+
+/**
+ * Request parameters for bookingControllerGetAllReports operation in DefaultApi.
+ * @export
+ * @interface DefaultApiBookingControllerGetAllReportsRequest
+ */
+export interface DefaultApiBookingControllerGetAllReportsRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof DefaultApiBookingControllerGetAllReports
+     */
+    readonly type: string
+}
+
+/**
+ * Request parameters for bookingControllerGetReportById operation in DefaultApi.
+ * @export
+ * @interface DefaultApiBookingControllerGetReportByIdRequest
+ */
+export interface DefaultApiBookingControllerGetReportByIdRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof DefaultApiBookingControllerGetReportById
+     */
+    readonly id: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof DefaultApiBookingControllerGetReportById
+     */
+    readonly type: string
+}
+
+/**
+ * Request parameters for bookingControllerUpdateReport operation in DefaultApi.
+ * @export
+ * @interface DefaultApiBookingControllerUpdateReportRequest
+ */
+export interface DefaultApiBookingControllerUpdateReportRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof DefaultApiBookingControllerUpdateReport
+     */
+    readonly type: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof DefaultApiBookingControllerUpdateReport
+     */
+    readonly id: string
+
+    /**
+     * 
+     * @type {UpdateBookingDto}
+     * @memberof DefaultApiBookingControllerUpdateReport
+     */
+    readonly updateBookingDto: UpdateBookingDto
+}
+
+/**
  * Request parameters for servicesControllerCreateReport operation in DefaultApi.
  * @export
  * @interface DefaultApiServicesControllerCreateReportRequest
  */
 export interface DefaultApiServicesControllerCreateReportRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof DefaultApiServicesControllerCreateReport
+     */
+    readonly id: string
+
     /**
      * 
      * @type {string}
@@ -1066,6 +1691,61 @@ export class DefaultApi extends BaseAPI {
 
     /**
      * 
+     * @param {DefaultApiBookingControllerCreateReportRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public bookingControllerCreateReport(requestParameters: DefaultApiBookingControllerCreateReportRequest, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).bookingControllerCreateReport(requestParameters.type, requestParameters.createBookingDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {DefaultApiBookingControllerDeleteReportRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public bookingControllerDeleteReport(requestParameters: DefaultApiBookingControllerDeleteReportRequest, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).bookingControllerDeleteReport(requestParameters.id, requestParameters.type, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {DefaultApiBookingControllerGetAllReportsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public bookingControllerGetAllReports(requestParameters: DefaultApiBookingControllerGetAllReportsRequest, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).bookingControllerGetAllReports(requestParameters.type, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {DefaultApiBookingControllerGetReportByIdRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public bookingControllerGetReportById(requestParameters: DefaultApiBookingControllerGetReportByIdRequest, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).bookingControllerGetReportById(requestParameters.id, requestParameters.type, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {DefaultApiBookingControllerUpdateReportRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public bookingControllerUpdateReport(requestParameters: DefaultApiBookingControllerUpdateReportRequest, options?: AxiosRequestConfig) {
+        return DefaultApiFp(this.configuration).bookingControllerUpdateReport(requestParameters.type, requestParameters.id, requestParameters.updateBookingDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
@@ -1102,7 +1782,7 @@ export class DefaultApi extends BaseAPI {
      * @memberof DefaultApi
      */
     public servicesControllerCreateReport(requestParameters: DefaultApiServicesControllerCreateReportRequest, options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).servicesControllerCreateReport(requestParameters.type, requestParameters.createServiceDto, options).then((request) => request(this.axios, this.basePath));
+        return DefaultApiFp(this.configuration).servicesControllerCreateReport(requestParameters.id, requestParameters.type, requestParameters.createServiceDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
