@@ -86,7 +86,7 @@ export const Shell = ({
                 >
                   {user}
                 </Title>
-                <Button variant="light" onClick={() => setUser(null)}>
+                <Button variant="light" onClick={() => setUser(undefined)}>
                   Logout
                 </Button>
               </Box>
