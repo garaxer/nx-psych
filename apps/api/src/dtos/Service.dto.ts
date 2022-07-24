@@ -16,79 +16,107 @@ import {
   IsString,
   IsNotEmpty,
   IsOptional,
+  IsDate,
+  IsBoolean,
 } from 'class-validator';
-import { Exclude, Expose } from 'class-transformer';
 import { ServiceType } from '../service';
 
 export class CreateServiceDto {
   @IsString()
   @IsNotEmpty()
-  name: string;
-
+  id: string;
+  @IsString()
+  @IsNotEmpty()
+  title: string;
+  @IsDate()
+  @IsOptional()
+  dateTime: Date;
   @IsNumber()
   @IsPositive()
-  price: number;
-
+  duration: number;
   @IsString()
   @IsNotEmpty()
   description: string;
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   image: string;
   @IsString()
   @IsNotEmpty()
-  longDescription: string;
+  category: string;
+  @IsNumber()
+  @IsPositive()
+  price: number;
+  @IsString()
+  @IsNotEmpty()
+  location: string;
+  @IsString()
+  @IsNotEmpty()
+  type: ServiceType;
+  @IsBoolean()
+  @IsOptional()
+  isCancelled: boolean;
+  @IsOptional()
+  @IsString()
+  city?: string;
+  @IsOptional()
+  @IsString()
+  venue?: string;
 }
 
 export class UpdateServiceDto {
-  @IsOptional()
   @IsString()
   @IsNotEmpty()
-  name: string;
-
   @IsOptional()
+  title: string;
+  @IsDate()
+  @IsNotEmpty()
+  @IsOptional()
+  dateTime: Date;
   @IsNumber()
   @IsPositive()
-  price: number;
-
   @IsOptional()
+  duration: number;
   @IsString()
   @IsNotEmpty()
+  @IsOptional()
   description: string;
-  @IsOptional()
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   image: string;
-  @IsOptional()
   @IsString()
   @IsNotEmpty()
-  longDescription: string;
+  @IsOptional()
+  category: string;
+  @IsNumber()
+  @IsPositive()
+  @IsOptional()
+  price: number;
+  @IsString()
+  @IsNotEmpty()
+  @IsOptional()
+  location: string;
+  @IsString()
+  @IsNotEmpty()
+  @IsOptional()
+  type: ServiceType;
 }
 
 export class ServiceResponseDto {
   id: string;
-  name: string;
-  price: number;
+  title: string;
   description: string;
-  image: string;
-  longDescription: string;
-
-  @Expose({ name: 'createdAt' })
-  transformCreatedAt() {
-    return this.created_at;
-  }
-  @Expose({ name: 'updatedAt' })
-  transformUpdatedAt() {
-    return this.updated_at;
-  }
-
-  @Exclude()
-  created_at: Date;
-
-  @Exclude()
-  updated_at: Date;
-
+  category: string;
+  dateTime?: Date;
+  image?: string;
+  city?: string;
+  venue?: string;
+  duration?: number;
+  price?: number;
+  location?: string;
+  isCancelled?: boolean;
   type: ServiceType;
+  created_at?: Date;
+  updated_at?: Date;
 
   constructor(partial: Partial<ServiceResponseDto>) {
     Object.assign(this, partial);

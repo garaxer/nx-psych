@@ -1,94 +1,70 @@
-import {
-  IsNumber,
-  IsPositive,
-  IsString,
-  IsNotEmpty,
-  IsOptional,
-  IsDate,
-} from 'class-validator';
-
-// Work out why this can't be imported from booking
-export enum BookingType {
-  REMOTE = 'remote',
-  INPERSON = 'inperson',
-}
+import { IsString, IsNotEmpty, IsOptional, IsBoolean } from 'class-validator';
+import { Exclude, Expose } from 'class-transformer';
+import { BookingType } from '../booking';
 
 export class CreateBookingDto {
   @IsString()
   @IsNotEmpty()
-  id: string;
+  timeSlotId: string;
   @IsString()
   @IsNotEmpty()
-  title: string;
-  @IsDate()
-  @IsNotEmpty()
-  date: Date;
-  @IsNumber()
-  @IsPositive()
-  duration: number;
+  name: string;
   @IsString()
   @IsNotEmpty()
-  description: string;
+  userId: string;
+  @IsBoolean()
+  @IsNotEmpty()
+  isHost: boolean;
   @IsString()
   @IsNotEmpty()
-  category: string;
-  @IsNumber()
-  @IsPositive()
-  price: number;
-  @IsString()
-  @IsNotEmpty()
-  location: string;
-  @IsString()
-  @IsNotEmpty()
-  type: BookingType;
+  paymentDetailsId: string;
 }
 
 export class UpdateBookingDto {
+  @IsOptional()
   @IsString()
   @IsNotEmpty()
+  timeSlotId: string;
   @IsOptional()
-  title: string;
-  @IsDate()
-  @IsNotEmpty()
-  @IsOptional()
-  date: Date;
-  @IsNumber()
-  @IsPositive()
-  @IsOptional()
-  duration: number;
   @IsString()
   @IsNotEmpty()
+  name: string;
   @IsOptional()
-  description: string;
   @IsString()
   @IsNotEmpty()
+  userId: string;
   @IsOptional()
-  category: string;
-  @IsNumber()
-  @IsPositive()
+  @IsBoolean()
+  @IsNotEmpty()
+  isHost: boolean;
   @IsOptional()
-  price: number;
   @IsString()
   @IsNotEmpty()
-  @IsOptional()
-  location: string;
-  @IsString()
-  @IsNotEmpty()
-  @IsOptional()
-  type: BookingType;
+  paymentDetailsId: string;
 }
 
 export class BookingResponseDto {
   id: string;
-  title: string;
-  date: Date;
-  duration: number;
-  description: string;
-  category: string;
-  price: number;
-  location: string;
-  created_at?: Date;
-  updated_at?: Date;
+  timeSlotId: string;
+  userId: string;
+  isHost: boolean;
+  paymentDetailsId: string;
+
+  @Expose({ name: 'createdAt' })
+  transformCreatedAt() {
+    return this.created_at;
+  }
+  @Expose({ name: 'updatedAt' })
+  transformUpdatedAt() {
+    return this.updated_at;
+  }
+
+  @Exclude()
+  created_at: Date;
+
+  @Exclude()
+  updated_at: Date;
+
   type: BookingType;
 
   constructor(partial: Partial<BookingResponseDto>) {

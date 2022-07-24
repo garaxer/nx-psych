@@ -2,7 +2,7 @@ import { Home, Messages, Album } from 'tabler-icons-react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { Container, Group } from '@mantine/core';
-import { Button, Shell, Menus } from 'libs/ui/src';
+import { Button, Shell, Menus } from '@nx-psych/ui';
 import { defaultApi } from 'libs/shared-types/src/lib/api/api';
 import {
   ServiceResponseDto,
@@ -88,6 +88,7 @@ const Index = ({
           <div id="welcome">
             <h1>
               <span>
+                <Palette />
                 Testing 2:
                 <Services services={services}>
                   {(service) => (

@@ -5,11 +5,17 @@ export enum ServiceType {
 
 export interface Service {
   id: string;
-  name: string;
-  price: number;
+  title: string;
+  dateTime: Date;
   description: string;
-  image: string;
-  longDescription: string;
+  category: string;
+  image?: string;
+  city?: string;
+  venue?: string;
+  duration?: number;
+  price?: number;
+  location?: string;
+  isCancelled?: boolean;
   created_at?: Date;
   updated_at?: Date;
   type: ServiceType;
@@ -18,6 +24,31 @@ export interface Service {
 export const data: { services: Service[] } = {
   services: [
     {
+      id: '1',
+      title: '1 hr appointment with Craig',
+      dateTime: new Date('08-08-2022'),
+      duration: 1,
+      description: 'Appointment',
+      category: 'Service type goes here',
+      price: 5.99,
+      location: 'remote',
+      type: ServiceType.INPERSON,
+    },
+    {
+      id: '2',
+      title: '2 hr appointment with Craig',
+      dateTime: new Date('08-09-2022'),
+      duration: 1,
+      description: 'Appointment',
+      category: 'Service type goes here',
+      price: 5.99,
+      location: 'remote',
+      type: ServiceType.INPERSON,
+    },
+  ],
+};
+
+/**{
       id: '1',
       name: 'Wheel Spinner',
       price: 5.99,
@@ -117,6 +148,4 @@ export const data: { services: Service[] } = {
       longDescription:
         "Did you know that a standard gear train has 3 gears? It is true! And, we've given you all three in this delightful fidget spinner. Spin away and watch your mind be blown away by the seemingly endless and rapid movement of these three little clockwork wheels.",
       type: ServiceType.INPERSON,
-    },
-  ],
-};
+    }, */
