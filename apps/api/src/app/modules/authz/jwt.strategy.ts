@@ -11,6 +11,10 @@ dotenv.config();
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor() {
+    console.log('Getting Authed');
+    console.log(process.env.AUTH0_AUDIENCE);
+    console.log('Getting Authed');
+
     super({
       secretOrKeyProvider: passportJwtSecret({
         cache: true,
@@ -27,6 +31,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   validate(payload: any) {
+    console.log('Getting Authed2');
+
     return payload;
   }
 }

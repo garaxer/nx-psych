@@ -1,6 +1,11 @@
 import { IsString, IsNotEmpty, IsOptional, IsBoolean } from 'class-validator';
 import { Exclude, Expose } from 'class-transformer';
-import { BookingType } from '../booking';
+
+// TODO figure out why I can't import this
+export enum BookingType {
+  REMOTE = 'remote',
+  INPERSON = 'inperson',
+}
 
 export class CreateBookingDto {
   @IsString()

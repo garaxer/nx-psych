@@ -3,6 +3,8 @@
 ```JS
 console.log('Stop looking at this app')
 ```
+Swagger:
+http://localhost:3333/docs/
 
 nest:
 ```mermaid

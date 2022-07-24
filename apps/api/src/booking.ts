@@ -11,7 +11,7 @@ export interface Booking {
   paymentDetailsId: string;
   created_at?: Date;
   updated_at?: Date;
-  type: BookingType;
+  type?: BookingType;
 }
 
 export const data: { bookings: Booking[] } = {

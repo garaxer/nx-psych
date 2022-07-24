@@ -22,6 +22,8 @@ import { data, ServiceType } from '../../../service';
 import { Permissions } from '../../../permissions.decorator';
 import { PermissionsGuard } from '../../../permissions.guard';
 import { AuthGuard } from '@nestjs/passport';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 @Controller('services/:type')
 export class ServicesController {
@@ -47,9 +49,13 @@ export class ServicesController {
 
   @Get()
   @ApiOkResponse({ type: [ServiceResponseDto] })
+  @UseGuards(AuthGuard('jwt'), PermissionsGuard)
   getAllReports(
     @Param('type', new ParseEnumPipe(ServiceType)) type: ServiceType
   ): ServiceResponseDto[] {
+    console.log(process.env.AUTH0_DOMAIN);
+    console.log('Getting');
+
     return this.reportService.getAllReports(type);
   }
 
@@ -82,16 +88,18 @@ export class ServicesController {
     return this.reportService.updateReport(type, id, body);
   }
 
+  @UseGuards(AuthGuard('jwt'), PermissionsGuard)
   @HttpCode(204)
   @Delete(':id')
-  @UseGuards(AuthGuard('jwt'), PermissionsGuard)
   @Permissions('delete:items')
   @ApiOkResponse()
   deleteReport(
-    @Param('id', ParseUUIDPipe) id: string,
+    @Param('id') id: string,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     @Param('type', new ParseEnumPipe(ServiceType)) type: ServiceType
   ): void {
+    console.log('Deleting');
+
     return this.reportService.deleteReport(id);
   }
 }

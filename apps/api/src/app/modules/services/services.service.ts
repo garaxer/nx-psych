@@ -4,19 +4,31 @@ import { data, ServiceType } from '../../../service';
 import { v4 as uuid } from 'uuid';
 
 interface Report {
-  name: string;
-  price: number;
+  title: string;
+  dateTime: Date;
   description: string;
-  image: string;
-  longDescription: string;
+  category: string;
+  image?: string;
+  city?: string;
+  venue?: string;
+  duration?: number;
+  price?: number;
+  location?: string;
+  isCancelled?: boolean;
 }
 
 interface UpdateReport {
-  name?: string;
-  price?: number;
+  title?: string;
+  dateTime?: Date;
   description?: string;
+  category?: string;
   image?: string;
-  longDescription?: string;
+  city?: string;
+  venue?: string;
+  duration?: number;
+  price?: number;
+  location?: string;
+  isCancelled?: boolean;
 }
 
 @Injectable()

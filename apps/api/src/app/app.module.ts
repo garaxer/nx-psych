@@ -20,9 +20,9 @@ import { AuthzModule } from './modules/authz/authz.module';
     ServicesModule,
     AuthzModule,
     // Examples:
-    CartModule,
-    AuthorizedModule,
-    AuthModule,
+    //CartModule,
+    //AuthorizedModule,
+    //AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

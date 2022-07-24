@@ -476,67 +476,6 @@
           }
         }
       }
-    },
-    "/api/cart": {
-      "get": {
-        "operationId": "CartController_index",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "CartController_create",
-        "parameters": [],
-        "responses": {
-          "201": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "CartController_destroy",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/authorized": {
-      "get": {
-        "operationId": "AuthorizedController_index",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
     }
   },
   "info": {
@@ -563,26 +502,16 @@
           "id": {
             "type": "string"
           },
-          "title": {
+          "timeSlotId": {
             "type": "string"
           },
-          "date": {
-            "format": "date-time",
+          "userId": {
             "type": "string"
           },
-          "duration": {
-            "type": "number"
+          "isHost": {
+            "type": "boolean"
           },
-          "description": {
-            "type": "string"
-          },
-          "category": {
-            "type": "string"
-          },
-          "price": {
-            "type": "number"
-          },
-          "location": {
+          "paymentDetailsId": {
             "type": "string"
           },
           "created_at": {
@@ -603,110 +532,67 @@
         },
         "required": [
           "id",
-          "title",
-          "date",
-          "duration",
-          "description",
-          "category",
-          "price",
-          "location",
+          "timeSlotId",
+          "userId",
+          "isHost",
+          "paymentDetailsId",
+          "created_at",
+          "updated_at",
           "type"
         ]
       },
       "CreateBookingDto": {
         "type": "object",
         "properties": {
-          "id": {
+          "timeSlotId": {
             "type": "string"
           },
-          "title": {
+          "name": {
             "type": "string"
           },
-          "date": {
-            "format": "date-time",
+          "userId": {
             "type": "string"
           },
-          "duration": {
-            "type": "number",
-            "minimum": 1
+          "isHost": {
+            "type": "boolean"
           },
-          "description": {
+          "paymentDetailsId": {
             "type": "string"
-          },
-          "category": {
-            "type": "string"
-          },
-          "price": {
-            "type": "number",
-            "minimum": 1
-          },
-          "location": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "remote",
-              "inperson"
-            ]
           }
         },
         "required": [
-          "id",
-          "title",
-          "date",
-          "duration",
-          "description",
-          "category",
-          "price",
-          "location",
-          "type"
+          "timeSlotId",
+          "name",
+          "userId",
+          "isHost",
+          "paymentDetailsId"
         ]
       },
       "UpdateBookingDto": {
         "type": "object",
         "properties": {
-          "title": {
+          "timeSlotId": {
             "type": "string"
           },
-          "date": {
-            "format": "date-time",
+          "name": {
             "type": "string"
           },
-          "duration": {
-            "type": "number",
-            "minimum": 1
-          },
-          "description": {
+          "userId": {
             "type": "string"
           },
-          "category": {
+          "isHost": {
+            "type": "boolean"
+          },
+          "paymentDetailsId": {
             "type": "string"
-          },
-          "price": {
-            "type": "number",
-            "minimum": 1
-          },
-          "location": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "remote",
-              "inperson"
-            ]
           }
         },
         "required": [
-          "title",
-          "date",
-          "duration",
-          "description",
-          "category",
-          "price",
-          "location",
-          "type"
+          "timeSlotId",
+          "name",
+          "userId",
+          "isHost",
+          "paymentDetailsId"
         ]
       },
       "ServiceResponseDto": {
@@ -715,19 +601,45 @@
           "id": {
             "type": "string"
           },
-          "name": {
+          "title": {
             "type": "string"
           },
-          "price": {
-            "type": "number"
-          },
           "description": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "dateTime": {
+            "format": "date-time",
             "type": "string"
           },
           "image": {
             "type": "string"
           },
-          "longDescription": {
+          "city": {
+            "type": "string"
+          },
+          "venue": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "number"
+          },
+          "price": {
+            "type": "number"
+          },
+          "location": {
+            "type": "string"
+          },
+          "isCancelled": {
+            "type": "boolean"
+          },
+          "type": {
+            "enum": [
+              "remote",
+              "inperson"
+            ],
             "type": "string"
           },
           "created_at": {
@@ -737,34 +649,30 @@
           "updated_at": {
             "format": "date-time",
             "type": "string"
-          },
-          "type": {
-            "enum": [
-              "remote",
-              "inperson"
-            ],
-            "type": "string"
           }
         },
         "required": [
           "id",
-          "name",
-          "price",
+          "title",
           "description",
-          "image",
-          "longDescription",
-          "created_at",
-          "updated_at",
+          "category",
           "type"
         ]
       },
       "CreateServiceDto": {
         "type": "object",
         "properties": {
-          "name": {
+          "id": {
             "type": "string"
           },
-          "price": {
+          "title": {
+            "type": "string"
+          },
+          "dateTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "duration": {
             "type": "number",
             "minimum": 1
           },
@@ -774,25 +682,58 @@
           "image": {
             "type": "string"
           },
-          "longDescription": {
+          "category": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number",
+            "minimum": 1
+          },
+          "location": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "remote",
+              "inperson"
+            ]
+          },
+          "isCancelled": {
+            "type": "boolean"
+          },
+          "city": {
+            "type": "string"
+          },
+          "venue": {
             "type": "string"
           }
         },
         "required": [
-          "name",
-          "price",
+          "id",
+          "title",
+          "dateTime",
+          "duration",
           "description",
           "image",
-          "longDescription"
+          "category",
+          "price",
+          "location",
+          "type",
+          "isCancelled"
         ]
       },
       "UpdateServiceDto": {
         "type": "object",
         "properties": {
-          "name": {
+          "title": {
             "type": "string"
           },
-          "price": {
+          "dateTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "duration": {
             "type": "number",
             "minimum": 1
           },
@@ -802,16 +743,34 @@
           "image": {
             "type": "string"
           },
-          "longDescription": {
+          "category": {
             "type": "string"
+          },
+          "price": {
+            "type": "number",
+            "minimum": 1
+          },
+          "location": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "remote",
+              "inperson"
+            ]
           }
         },
         "required": [
-          "name",
-          "price",
+          "title",
+          "dateTime",
+          "duration",
           "description",
           "image",
-          "longDescription"
+          "category",
+          "price",
+          "location",
+          "type"
         ]
       }
     }
