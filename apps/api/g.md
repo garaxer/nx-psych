@@ -21,39 +21,42 @@ erDiagram
     SERVICE {
         id string
         title string
+        time_slots TimeSlot_List
+        sections string_list
         description string
-        category string
-        dateTime Date
         image string
-        city string
         venue string
         duration number
         price number
-        location string
-        isCancelled boolean
+        is_cancelled boolean
         created_at Date
         updated_at Date
+        type ServiceType
     } 
     TIMESLOTS ||--o{ BOOKINGS : creates
     TIMESLOTS {
-        id string PK
-        dateTime Date
-        availabilityCount number
-        bookingCount number
-        isBookable boolean
-        maximumPartySize number
+        id string
+        start_time Date
+        availability_count number
+        booking_count number
+        is_bookable boolean
+        maximum_party_size number
         created_at Date
         updated_at Date
-        serviceId string FK
+        service_id string
     }
     BOOKINGS {
         id string PK
-        timeSlotId string FK
-        userId string FK
-        host boolean
-        paymentDetailsId string FK
+        customer_id string FK
+        time_slot_id string FK
+        service_id string FK
+        booking_status string
+        is_host boolean
+        party_size number
+        invoice_id string FK
         created_at Date
         updated_at Date
+        type BookingType
     }
     USERS ||--o{ BOOKINGS : places
     USERS {

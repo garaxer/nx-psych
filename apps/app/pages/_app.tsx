@@ -1,6 +1,14 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import './styles.css';
+import styled from '@emotion/styled';
+
+const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+`;
+
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return (
@@ -8,9 +16,9 @@ function CustomApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>Craig&apos;s Counselling</title>
       </Head>
-      <main className="app">
+      <Main>
         <Component {...pageProps} />
-      </main>
+      </Main>
     </>
   );
 }

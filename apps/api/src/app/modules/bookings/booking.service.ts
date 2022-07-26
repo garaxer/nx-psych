@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { BookingResponseDto } from '../../../dtos/booking.dto';
+import {
+  BookingResponseDto,
+  CreateBookingDto,
+} from '../../../dtos/booking.dto';
 import { data, BookingType } from '../../../booking';
 import { v4 as uuid } from 'uuid';
 import { Booking } from '../../../booking';
@@ -25,16 +28,18 @@ export class BookingService {
     return new BookingResponseDto(report);
   }
 
-  createReport(type: BookingType, body: CreateBooking): BookingResponseDto {
-    const newReport = {
+  createReport(type: BookingType, body: CreateBookingDto): BookingResponseDto {
+    const newBooking: Booking = {
       id: uuid(),
-      ...body,
       created_at: new Date(),
       updated_at: new Date(),
       type,
+      customer_id: body.customer.userId,
+      time_slot_id: body.time_slot_id,
+      service_id: body.service.id,
     };
-    data.bookings.push(newReport);
-    return new BookingResponseDto(newReport);
+    data.bookings.push(newBooking);
+    return new BookingResponseDto(newBooking);
   }
 
   updateReport(

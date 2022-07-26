@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { ServiceResponseDto } from '../../../dtos/service.dto';
-import { data, ServiceType } from '../../../service';
+import {
+  CreateServiceDto,
+  ServiceResponseDto,
+} from '../../../dtos/service.dto';
+import { data, Service, ServiceType } from '../../../service';
 import { v4 as uuid } from 'uuid';
 
 interface Report {
@@ -49,10 +52,16 @@ export class ServiceService {
     return new ServiceResponseDto(report);
   }
 
-  createReport(type: ServiceType, body: Report): ServiceResponseDto {
-    const newReport = {
+  createReport(type: ServiceType, body: CreateServiceDto): ServiceResponseDto {
+    const newReport: Service = {
       id: uuid(),
       ...body,
+      // TODO time_slot class to handle date
+      time_slots: body.time_slots.map((ts) => ({
+        ...ts,
+        id: uuid(),
+        start_time: new Date(ts.start_time),
+      })),
       created_at: new Date(),
       updated_at: new Date(),
       type,

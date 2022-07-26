@@ -1,5 +1,7 @@
-import { IsString, IsNotEmpty, IsOptional, IsBoolean } from 'class-validator';
 import { Exclude, Expose } from 'class-transformer';
+import { Booking } from '../booking';
+import { Service } from '../service';
+import { User } from './User.dto';
 
 // TODO figure out why I can't import this
 export enum BookingType {
@@ -8,52 +10,37 @@ export enum BookingType {
 }
 
 export class CreateBookingDto {
-  @IsString()
-  @IsNotEmpty()
-  timeSlotId: string;
-  @IsString()
-  @IsNotEmpty()
-  name: string;
-  @IsString()
-  @IsNotEmpty()
-  userId: string;
-  @IsBoolean()
-  @IsNotEmpty()
-  isHost: boolean;
-  @IsString()
-  @IsNotEmpty()
-  paymentDetailsId: string;
+  customer: User;
+  start_time: string;
+  time_slot_id: string;
+  party_size?: number;
+  managers_notes?: number;
+  customers_notes?: number;
+  is_host?: boolean;
+  service: Service;
+  type?: BookingType;
 }
 
 export class UpdateBookingDto {
-  @IsOptional()
-  @IsString()
-  @IsNotEmpty()
-  timeSlotId: string;
-  @IsOptional()
-  @IsString()
-  @IsNotEmpty()
-  name: string;
-  @IsOptional()
-  @IsString()
-  @IsNotEmpty()
-  userId: string;
-  @IsOptional()
-  @IsBoolean()
-  @IsNotEmpty()
-  isHost: boolean;
-  @IsOptional()
-  @IsString()
-  @IsNotEmpty()
-  paymentDetailsId: string;
+  customer: User;
+  start_time: string;
+  time_slot_id: string;
+  party_size?: number;
+  managers_notes?: number;
+  customers_notes?: number;
+  is_host?: boolean;
+  service: Service;
 }
 
-export class BookingResponseDto {
+export class BookingResponseDto implements Booking {
   id: string;
-  timeSlotId: string;
-  userId: string;
-  isHost: boolean;
-  paymentDetailsId: string;
+  customer_id: string;
+  time_slot_id: string;
+  service_id: string;
+  booking_status?: string;
+  is_host?: boolean;
+  party_size?: number;
+  invoice_id?: string;
 
   @Expose({ name: 'createdAt' })
   transformCreatedAt() {

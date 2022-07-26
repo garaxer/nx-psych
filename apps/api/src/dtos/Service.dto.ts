@@ -1,15 +1,3 @@
-// import { ApiProperty } from '@nestjs/swagger';
-
-// export class ServiceDto {
-//   @ApiProperty({ type: Number })
-//   id?: number;
-//   name?: string;
-//   price?: number;
-//   description?: string;
-//   image?: string;
-//   longDescription?: string;
-// }
-
 import {
   IsNumber,
   IsPositive,
@@ -17,49 +5,22 @@ import {
   IsNotEmpty,
   IsOptional,
   IsDate,
-  IsBoolean,
 } from 'class-validator';
-import { ServiceType } from '../service';
+import { Service, ServiceType } from '../service';
+import { TimeSlot } from '../timeSlot';
+import { CreateTimeSlotDto } from './timeSlot.dto';
 
 export class CreateServiceDto {
   @IsString()
   @IsNotEmpty()
-  id: string;
-  @IsString()
-  @IsNotEmpty()
   title: string;
-  @IsDate()
-  @IsOptional()
-  dateTime: Date;
-  @IsNumber()
-  @IsPositive()
-  duration: number;
-  @IsString()
   @IsNotEmpty()
-  description: string;
-  @IsString()
-  @IsOptional()
-  image: string;
-  @IsString()
-  @IsNotEmpty()
-  category: string;
-  @IsNumber()
-  @IsPositive()
-  price: number;
-  @IsString()
-  @IsNotEmpty()
-  location: string;
-  @IsString()
-  @IsNotEmpty()
-  type: ServiceType;
-  @IsBoolean()
-  @IsOptional()
-  isCancelled: boolean;
-  @IsOptional()
-  @IsString()
-  city?: string;
-  @IsOptional()
-  @IsString()
+  time_slots: CreateTimeSlotDto[];
+  sections?: string[];
+  description?: string;
+  image?: string;
+  price?: number;
+  duration?: number;
   venue?: string;
 }
 
@@ -101,22 +62,20 @@ export class UpdateServiceDto {
   type: ServiceType;
 }
 
-export class ServiceResponseDto {
+export class ServiceResponseDto implements Service {
   id: string;
   title: string;
-  description: string;
-  category: string;
-  dateTime?: Date;
+  time_slots?: TimeSlot[];
+  sections?: string[];
+  description?: string;
   image?: string;
-  city?: string;
   venue?: string;
   duration?: number;
   price?: number;
-  location?: string;
-  isCancelled?: boolean;
-  type: ServiceType;
+  is_cancelled?: boolean;
   created_at?: Date;
   updated_at?: Date;
+  type?: ServiceType;
 
   constructor(partial: Partial<ServiceResponseDto>) {
     Object.assign(this, partial);

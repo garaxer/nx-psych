@@ -49,7 +49,6 @@ export class ServicesController {
 
   @Get()
   @ApiOkResponse({ type: [ServiceResponseDto] })
-  @UseGuards(AuthGuard('jwt'), PermissionsGuard)
   getAllReports(
     @Param('type', new ParseEnumPipe(ServiceType)) type: ServiceType
   ): ServiceResponseDto[] {
@@ -72,7 +71,7 @@ export class ServicesController {
   @ApiOkResponse({ type: ServiceResponseDto })
   createReport(
     @Body() body: CreateServiceDto,
-    @Param('id', ParseUUIDPipe) id: string,
+    @Param('id') _id: string,
     @Param('type', new ParseEnumPipe(ServiceType)) type: ServiceType
   ): ServiceResponseDto {
     return this.reportService.createReport(type, body);

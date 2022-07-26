@@ -502,16 +502,25 @@
           "id": {
             "type": "string"
           },
-          "timeSlotId": {
+          "customer_id": {
             "type": "string"
           },
-          "userId": {
+          "time_slot_id": {
             "type": "string"
           },
-          "isHost": {
+          "service_id": {
+            "type": "string"
+          },
+          "booking_status": {
+            "type": "string"
+          },
+          "is_host": {
             "type": "boolean"
           },
-          "paymentDetailsId": {
+          "party_size": {
+            "type": "number"
+          },
+          "invoice_id": {
             "type": "string"
           },
           "created_at": {
@@ -532,10 +541,9 @@
         },
         "required": [
           "id",
-          "timeSlotId",
-          "userId",
-          "isHost",
-          "paymentDetailsId",
+          "customer_id",
+          "time_slot_id",
+          "service_id",
           "created_at",
           "updated_at",
           "type"
@@ -544,55 +552,78 @@
       "CreateBookingDto": {
         "type": "object",
         "properties": {
-          "timeSlotId": {
+          "customer": {
+            "type": "object"
+          },
+          "start_time": {
             "type": "string"
           },
-          "name": {
+          "time_slot_id": {
             "type": "string"
           },
-          "userId": {
-            "type": "string"
+          "party_size": {
+            "type": "number"
           },
-          "isHost": {
+          "managers_notes": {
+            "type": "number"
+          },
+          "customers_notes": {
+            "type": "number"
+          },
+          "is_host": {
             "type": "boolean"
           },
-          "paymentDetailsId": {
-            "type": "string"
+          "service": {
+            "type": "object"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "remote",
+              "inperson"
+            ]
           }
         },
         "required": [
-          "timeSlotId",
-          "name",
-          "userId",
-          "isHost",
-          "paymentDetailsId"
+          "customer",
+          "start_time",
+          "time_slot_id",
+          "service"
         ]
       },
       "UpdateBookingDto": {
         "type": "object",
         "properties": {
-          "timeSlotId": {
+          "customer": {
+            "type": "object"
+          },
+          "start_time": {
             "type": "string"
           },
-          "name": {
+          "time_slot_id": {
             "type": "string"
           },
-          "userId": {
-            "type": "string"
+          "party_size": {
+            "type": "number"
           },
-          "isHost": {
+          "managers_notes": {
+            "type": "number"
+          },
+          "customers_notes": {
+            "type": "number"
+          },
+          "is_host": {
             "type": "boolean"
           },
-          "paymentDetailsId": {
-            "type": "string"
+          "service": {
+            "type": "object"
           }
         },
         "required": [
-          "timeSlotId",
-          "name",
-          "userId",
-          "isHost",
-          "paymentDetailsId"
+          "customer",
+          "start_time",
+          "time_slot_id",
+          "service"
         ]
       },
       "ServiceResponseDto": {
@@ -604,20 +635,22 @@
           "title": {
             "type": "string"
           },
+          "time_slots": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
           "description": {
             "type": "string"
           },
-          "category": {
-            "type": "string"
-          },
-          "dateTime": {
-            "format": "date-time",
-            "type": "string"
-          },
           "image": {
-            "type": "string"
-          },
-          "city": {
             "type": "string"
           },
           "venue": {
@@ -629,18 +662,8 @@
           "price": {
             "type": "number"
           },
-          "location": {
-            "type": "string"
-          },
-          "isCancelled": {
+          "is_cancelled": {
             "type": "boolean"
-          },
-          "type": {
-            "enum": [
-              "remote",
-              "inperson"
-            ],
-            "type": "string"
           },
           "created_at": {
             "format": "date-time",
@@ -649,32 +672,37 @@
           "updated_at": {
             "format": "date-time",
             "type": "string"
+          },
+          "type": {
+            "enum": [
+              "remote",
+              "inperson"
+            ],
+            "type": "string"
           }
         },
         "required": [
           "id",
-          "title",
-          "description",
-          "category",
-          "type"
+          "title"
         ]
       },
       "CreateServiceDto": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string"
-          },
           "title": {
             "type": "string"
           },
-          "dateTime": {
-            "format": "date-time",
-            "type": "string"
+          "time_slots": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
           },
-          "duration": {
-            "type": "number",
-            "minimum": 1
+          "sections": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "description": {
             "type": "string"
@@ -682,45 +710,19 @@
           "image": {
             "type": "string"
           },
-          "category": {
-            "type": "string"
-          },
           "price": {
-            "type": "number",
-            "minimum": 1
+            "type": "number"
           },
-          "location": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "remote",
-              "inperson"
-            ]
-          },
-          "isCancelled": {
-            "type": "boolean"
-          },
-          "city": {
-            "type": "string"
+          "duration": {
+            "type": "number"
           },
           "venue": {
             "type": "string"
           }
         },
         "required": [
-          "id",
           "title",
-          "dateTime",
-          "duration",
-          "description",
-          "image",
-          "category",
-          "price",
-          "location",
-          "type",
-          "isCancelled"
+          "time_slots"
         ]
       },
       "UpdateServiceDto": {

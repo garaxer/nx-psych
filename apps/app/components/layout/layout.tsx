@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { PropsWithChildren, useState, MouseEvent } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,24 +13,21 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import AppThemeProvider from './AppThemeProvider';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { purple } from '@mui/material/colors';
+import { AppLayout } from '@nx-psych/ui';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const ResponsiveAppBar = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
-    null
-  );
+type AppBarProps = { title: string };
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+const ResponsiveAppBar = ({ children }: PropsWithChildren<AppBarProps>) => {
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+
+  const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
 
@@ -43,19 +40,6 @@ const ResponsiveAppBar = () => {
   };
 
   // const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
-
-  const theme2 = createTheme({
-    palette: {
-      primary: {
-        // Purple and green play nicely together.
-        main: purple[500],
-      },
-      secondary: {
-        // This is green.A700 as hex.
-        main: '#11cb5f',
-      },
-    },
-  });
 
   return (
     <AppThemeProvider>
@@ -180,12 +164,12 @@ const ResponsiveAppBar = () => {
           </Toolbar>
         </Container>
       </AppBar>
-      <ThemeProvider theme={theme2}>
-        <Button color="primary" variant="contained">
-          Hello
-        </Button>
-      </ThemeProvider>
-      <AppThemeProvider.ToggleDarkMode />
+      <Container maxWidth="lg" sx={{ paddingTop: 5, flexGrow: 1 }}>
+        {children}
+      </Container>
+      <div>
+        <AppThemeProvider.ToggleDarkMode />
+      </div>
     </AppThemeProvider>
   );
 };

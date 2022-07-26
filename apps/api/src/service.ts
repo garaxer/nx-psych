@@ -1,3 +1,5 @@
+import { TimeSlot } from './timeSlot';
+
 export enum ServiceType {
   REMOTE = 'remote',
   INPERSON = 'inperson',
@@ -6,43 +8,43 @@ export enum ServiceType {
 export interface Service {
   id: string;
   title: string;
-  dateTime: Date;
-  description: string;
-  category: string;
+  time_slots?: TimeSlot[];
+  sections?: string[];
+  description?: string;
   image?: string;
-  city?: string;
   venue?: string;
   duration?: number;
   price?: number;
-  location?: string;
-  isCancelled?: boolean;
+  is_cancelled?: boolean;
   created_at?: Date;
   updated_at?: Date;
-  type: ServiceType;
+  type?: ServiceType;
 }
 
 export const data: { services: Service[] } = {
   services: [
     {
       id: '1',
-      title: '1 hr appointment with Craig',
-      dateTime: new Date('08-08-2022'),
-      duration: 1,
+      title: 'Lunch',
+      time_slots: [
+        { id: '1', start_time: new Date('08-08-2022 12:00') },
+        { id: '1', start_time: new Date('08-08-2022 12:30') },
+      ],
+      duration: 30,
       description: 'Appointment',
-      category: 'Service type goes here',
       price: 5.99,
-      location: 'remote',
       type: ServiceType.INPERSON,
     },
     {
       id: '2',
-      title: '2 hr appointment with Craig',
-      dateTime: new Date('08-09-2022'),
-      duration: 1,
+      title: 'Dinner',
+      time_slots: [
+        { id: '1', start_time: new Date('08-08-2022 17:00') },
+        { id: '1', start_time: new Date('08-08-2022 18:00') },
+      ],
+      duration: 60,
       description: 'Appointment',
-      category: 'Service type goes here',
       price: 5.99,
-      location: 'remote',
       type: ServiceType.INPERSON,
     },
   ],
