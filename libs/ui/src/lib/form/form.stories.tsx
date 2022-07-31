@@ -3,6 +3,25 @@ import { Form, Formik } from 'formik';
 import CreateService, { CreateServiceProps } from './createService';
 import MyTextInput, { MyTextInputProps } from './MyTextInput';
 import * as Yup from 'yup';
+import MySelectInput from './MySelectInput';
+import AddDate from './AddDate';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Button } from '@mui/material';
+/** Theme */
+
+const theme = createTheme({
+  palette: {
+    background: {
+      paper: '#e5e5e5',
+    },
+    primary: {
+      main: '#d0652b',
+    },
+    secondary: {
+      main: '#e65400',
+    },
+  },
+});
 
 export default {
   component: CreateService,
@@ -35,6 +54,10 @@ const MyTextInputTemplate: Story<MyTextInputProps> = (args) => (
   >
     <Form>
       <MyTextInput {...args} />
+      <MySelectInput menuItems={[{ label: 'foo', value: 'foo' }]} {...args} />
+      <MyTextInput {...args} type={'number'} />
+      <AddDate placeholder={'Enter Date'} name={'timeSlots'} menuItems={[]} />
+      <Button type="submit">Submit</Button>
     </Form>
   </Formik>
 );
