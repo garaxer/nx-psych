@@ -17,6 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "@nx-psych/shared-types": ["libs/shared-types/src/index.ts"],
+      "@nx-psych/shared-types/src": ["libs/shared-types/src/"],
       "@nx-psych/ui": ["libs/ui/src/index.ts"]
     }
   },

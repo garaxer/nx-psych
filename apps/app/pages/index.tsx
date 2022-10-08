@@ -3,11 +3,13 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { Container, Group } from '@mantine/core';
 import { Button, Shell, Menus } from '@nx-psych/ui';
-import { defaultApi } from 'libs/shared-types/src/lib/api/api';
+import { api } from '@nx-psych/shared-types';
+const { defaultApi } = api;
 import {
   ServiceResponseDto,
   ServiceResponseDtoTypeEnum,
 } from 'libs/shared-types/src/lib/api/generated/api';
+
 import withProvider from '../context/withProvider';
 import {
   UserProvider,
