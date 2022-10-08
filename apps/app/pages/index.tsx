@@ -88,7 +88,6 @@ const Index = ({
           <div id="welcome">
             <h1>
               <span>
-                <Palette />
                 Testing 2:
                 <Services services={services}>
                   {(service) => (

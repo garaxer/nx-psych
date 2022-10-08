@@ -26,8 +26,8 @@ export class UpdateBookingDto {
   start_time: string;
   time_slot_id: string;
   party_size?: number;
-  managers_notes?: number;
-  customers_notes?: number;
+  managers_notes?: string;
+  customers_notes?: string;
   is_host?: boolean;
   service: Service;
 }
@@ -62,4 +62,9 @@ export class BookingResponseDto implements Booking {
   constructor(partial: Partial<BookingResponseDto>) {
     Object.assign(this, partial);
   }
+  startDateTime: Date;
+  bookingStatus: string;
+  section?: string;
+  managers_notes?: string;
+  customers_notes?: string;
 }

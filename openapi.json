@@ -537,6 +537,22 @@
               "inperson"
             ],
             "type": "string"
+          },
+          "startDateTime": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "bookingStatus": {
+            "type": "string"
+          },
+          "section": {
+            "type": "string"
+          },
+          "managers_notes": {
+            "type": "string"
+          },
+          "customers_notes": {
+            "type": "string"
           }
         },
         "required": [
@@ -546,7 +562,9 @@
           "service_id",
           "created_at",
           "updated_at",
-          "type"
+          "type",
+          "startDateTime",
+          "bookingStatus"
         ]
       },
       "CreateBookingDto": {
@@ -607,10 +625,10 @@
             "type": "number"
           },
           "managers_notes": {
-            "type": "number"
+            "type": "string"
           },
           "customers_notes": {
-            "type": "number"
+            "type": "string"
           },
           "is_host": {
             "type": "boolean"

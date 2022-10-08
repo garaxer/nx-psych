@@ -37,6 +37,8 @@ export class BookingService {
       customer_id: body.customer.userId,
       time_slot_id: body.time_slot_id,
       service_id: body.service.id,
+      startDateTime: new Date(body.start_time),
+      bookingStatus: 'remote',
     };
     data.bookings.push(newBooking);
     return new BookingResponseDto(newBooking);

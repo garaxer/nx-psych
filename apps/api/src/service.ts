@@ -50,6 +50,41 @@ export const data: { services: Service[] } = {
   ],
 };
 
+
+// {
+//   "id": "9ed6dc2c-5c96-4218-9ac6-dde908ff4c65",
+//   "bookingStatus": "OPEN",
+//   "created_at": "2022-08-27T06:55:17.195Z",
+//   "creatorEmail": "gary@example.com",
+//   "description": "",
+//   "duration": 60,
+//   "maxCapacity": 12,
+//   "maxPartySize": 1,
+//   "reminder": [
+//    "weekly"
+//   ],
+//   "reminderSentDate": "2022-08-26T02:39:43.013Z",
+//   "sendEmail": false,
+//   "sendText": true,
+//   "serviceType": "",
+//   "startDateTime": "2022-08-27T06:55:17.195Z",
+//   "timeSlots": [
+//    {
+//     "id": "1200",
+//     "attendees": [
+//      {
+//       "email": "gbagnall8@gmail.com",
+//       "name": "Gary",
+//       "phone": "+61434984069"
+//      }
+//     ]
+//    }
+//   ],
+//   "title": "I love you {name}",
+//   "updated_at": "2022-08-20T17:04:31.370Z",
+//   "venue": ""
+//  }
+
 /**{
       id: '1',
       name: 'Wheel Spinner',
