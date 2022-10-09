@@ -55,3 +55,10 @@ https://github.com/jherr/nx-with-exp-nextjs/tree/master/apps/api
 npm run all
 
 anytime you change the backend types, re run openapi
+
+
+TODO:
+auth
+create service
+view service
+attend service - seperate react micro ui, use the psych folder, much like the restaurant booking api

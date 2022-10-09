@@ -6,7 +6,7 @@ import {
   IsOptional,
   IsDate,
 } from 'class-validator';
-import { Service, ServiceType } from '../service';
+import { Reminder, Service, ServiceType } from '../service';
 import { TimeSlot } from '../timeSlot';
 import { CreateTimeSlotDto } from './timeSlot.dto';
 
@@ -15,13 +15,15 @@ export class CreateServiceDto {
   @IsNotEmpty()
   title: string;
   @IsNotEmpty()
-  time_slots: CreateTimeSlotDto[];
+  timeSlots: CreateTimeSlotDto[];
   sections?: string[];
   description?: string;
   image?: string;
   price?: number;
   duration?: number;
   venue?: string;
+  creatorEmail?: string;
+  reminder?: Reminder;
 }
 
 export class UpdateServiceDto {
@@ -65,7 +67,7 @@ export class UpdateServiceDto {
 export class ServiceResponseDto implements Service {
   id: string;
   title: string;
-  time_slots?: TimeSlot[];
+  timeSlots?: TimeSlot[];
   sections?: string[];
   description?: string;
   image?: string;

@@ -13,33 +13,28 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import AppThemeProvider from './AppThemeProvider';
-import { AppLayout } from '@nx-psych/ui';
+import LoginAvatar from '../login/LoginAvatar';
+import ProtectedAuth from '../login/ProtectedAuth';
 
 const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-type AppBarProps = { title: string };
+type AppBarProps = { title: string; useAuth: boolean };
 
-const ResponsiveAppBar = ({ children }: PropsWithChildren<AppBarProps>) => {
+const ResponsiveAppBar = ({
+  useAuth,
+  children,
+}: PropsWithChildren<AppBarProps>) => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-
+  
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event: MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
 
-  // const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
   return (
     <AppThemeProvider>
@@ -133,39 +128,14 @@ const ResponsiveAppBar = ({ children }: PropsWithChildren<AppBarProps>) => {
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
+              {useAuth && <LoginAvatar />}
+              
             </Box>
           </Toolbar>
         </Container>
       </AppBar>
       <Container maxWidth="lg" sx={{ paddingTop: 5, flexGrow: 1 }}>
-        {children}
+        {useAuth ? <ProtectedAuth>{children}</ProtectedAuth> : children}
       </Container>
       <div>
         <AppThemeProvider.ToggleDarkMode />

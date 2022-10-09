@@ -4,7 +4,7 @@ import utilStyles from '../utils.module.css';
 
 const CreateService = () => {
   return (
-    <ResponsiveAppBar title={'Create Bookings'}>
+    <ResponsiveAppBar title={'Create Bookings'} useAuth>
       <Head>
         <title>Creating Service</title>
       </Head>

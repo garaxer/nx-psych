@@ -653,7 +653,7 @@
           "title": {
             "type": "string"
           },
-          "time_slots": {
+          "timeSlots": {
             "type": "array",
             "items": {
               "type": "object"
@@ -710,7 +710,7 @@
           "title": {
             "type": "string"
           },
-          "time_slots": {
+          "timeSlots": {
             "type": "array",
             "items": {
               "type": "object"
@@ -736,11 +736,17 @@
           },
           "venue": {
             "type": "string"
+          },
+          "creatorEmail": {
+            "type": "string"
+          },
+          "reminder": {
+            "type": "object"
           }
         },
         "required": [
           "title",
-          "time_slots"
+          "timeSlots"
         ]
       },
       "UpdateServiceDto": {

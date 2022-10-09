@@ -57,7 +57,7 @@ export class ServiceService {
       id: uuid(),
       ...body,
       // TODO time_slot class to handle date
-      time_slots: body.time_slots.map((ts) => ({
+      timeSlots: body.timeSlots.map((ts) => ({
         ...ts,
         id: uuid(),
         start_time: new Date(ts.start_time),

@@ -21,7 +21,7 @@ erDiagram
     SERVICE {
         id string
         title string
-        time_slots TimeSlot_List
+        timeSlots TimeSlot_List
         sections string_list
         description string
         image string

@@ -8,14 +8,19 @@ export enum ServiceType {
 export interface Service {
   id: string;
   title: string;
-  time_slots?: TimeSlot[];
+  timeSlots?: TimeSlot[];
   sections?: string[];
   description?: string;
   image?: string;
   venue?: string;
   duration?: number;
   price?: number;
-  is_cancelled?: boolean;
+  isCancelled?: boolean;
+  maxCapacity?: number;
+  maxPartySize?: number;
+  startDateTime?: string;
+  creatorEmail?: string;
+  reminder?: Reminder;
   created_at?: Date;
   updated_at?: Date;
   type?: ServiceType;
@@ -26,7 +31,7 @@ export const data: { services: Service[] } = {
     {
       id: '1',
       title: 'Lunch',
-      time_slots: [
+      timeSlots: [
         { id: '1', start_time: new Date('08-08-2022 12:00') },
         { id: '1', start_time: new Date('08-08-2022 12:30') },
       ],
@@ -38,7 +43,7 @@ export const data: { services: Service[] } = {
     {
       id: '2',
       title: 'Dinner',
-      time_slots: [
+      timeSlots: [
         { id: '1', start_time: new Date('08-08-2022 17:00') },
         { id: '1', start_time: new Date('08-08-2022 18:00') },
       ],
@@ -50,6 +55,14 @@ export const data: { services: Service[] } = {
   ],
 };
 
+export type Frequencies = 'daily' | 'weekly';
+
+export type Reminder = {
+  frequencies: Frequencies[];
+  sendEmail: boolean;
+  sendText: boolean;
+  reminderSentDate: string;
+};
 
 // {
 //   "id": "9ed6dc2c-5c96-4218-9ac6-dde908ff4c65",
