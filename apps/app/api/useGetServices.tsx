@@ -13,7 +13,7 @@ const useAddInvoice = () => {
 
   const { getIdTokenClaims } = useAuth0();
 
-  const mutate = async (invoice: CreateServiceDto) => {
+  const mutate = async (service: CreateServiceDto) => {
     const idToken = await getIdTokenClaims();
     if (!idToken) {
       alert('Please login');
@@ -21,7 +21,7 @@ const useAddInvoice = () => {
     }
     try {
       setIsMutating(true);
-      const response = await api.Services(idToken.__raw).create(invoice);
+      const response = await api.Services(idToken.__raw).create(service);
 
       setData(response);
       setIsMutating(false);

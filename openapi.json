@@ -680,8 +680,23 @@
           "price": {
             "type": "number"
           },
-          "is_cancelled": {
+          "isCancelled": {
             "type": "boolean"
+          },
+          "maxCapacity": {
+            "type": "number"
+          },
+          "maxPartySize": {
+            "type": "number"
+          },
+          "startDateTime": {
+            "type": "string"
+          },
+          "creatorEmail": {
+            "type": "string"
+          },
+          "reminder": {
+            "type": "object"
           },
           "created_at": {
             "format": "date-time",

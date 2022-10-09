@@ -1,3 +1,8 @@
+import {
+  CreateServiceDto,
+  ServiceResponseDto,
+} from 'libs/shared-types/src/lib/api/generated';
+
 const responseBody = <T>(response: Response) => {
   console.log(response);
 
@@ -9,7 +14,21 @@ const responseBody = <T>(response: Response) => {
 
 const BASE_URL = 'getmefromenv';
 
-const Services = (token: string, baseUrl = BASE_URL) => ({});
+const f: ServiceResponseDto = {
+  id: '',
+  name: '',
+  price: 0,
+  description: '',
+  image: '',
+  longDescription: '',
+  created_at: '',
+  updated_at: '',
+  type: 'remote',
+};
+
+const Services = (token: string, baseUrl = BASE_URL) => ({
+  create: (service: CreateServiceDto) => f,
+});
 
 const agent = {
   Services,

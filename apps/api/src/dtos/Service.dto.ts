@@ -74,7 +74,12 @@ export class ServiceResponseDto implements Service {
   venue?: string;
   duration?: number;
   price?: number;
-  is_cancelled?: boolean;
+  isCancelled?: boolean;
+  maxCapacity?: number;
+  maxPartySize?: number;
+  startDateTime?: string;
+  creatorEmail?: string;
+  reminder?: Reminder;
   created_at?: Date;
   updated_at?: Date;
   type?: ServiceType;
