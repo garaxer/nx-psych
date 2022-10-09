@@ -38,61 +38,91 @@ export interface BookingResponseDto {
      * @type {string}
      * @memberof BookingResponseDto
      */
-    'title': string;
+    'customer_id': string;
     /**
      * 
      * @type {string}
      * @memberof BookingResponseDto
      */
-    'date': string;
+    'time_slot_id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BookingResponseDto
+     */
+    'service_id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BookingResponseDto
+     */
+    'booking_status'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof BookingResponseDto
+     */
+    'is_host'?: boolean;
     /**
      * 
      * @type {number}
      * @memberof BookingResponseDto
      */
-    'duration': number;
+    'party_size'?: number;
     /**
      * 
      * @type {string}
      * @memberof BookingResponseDto
      */
-    'description': string;
+    'invoice_id'?: string;
     /**
      * 
      * @type {string}
      * @memberof BookingResponseDto
      */
-    'category': string;
-    /**
-     * 
-     * @type {number}
-     * @memberof BookingResponseDto
-     */
-    'price': number;
+    'created_at': string;
     /**
      * 
      * @type {string}
      * @memberof BookingResponseDto
      */
-    'location': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BookingResponseDto
-     */
-    'created_at'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BookingResponseDto
-     */
-    'updated_at'?: string;
+    'updated_at': string;
     /**
      * 
      * @type {string}
      * @memberof BookingResponseDto
      */
     'type': BookingResponseDtoTypeEnum;
+    /**
+     * 
+     * @type {string}
+     * @memberof BookingResponseDto
+     */
+    'startDateTime': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BookingResponseDto
+     */
+    'bookingStatus': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BookingResponseDto
+     */
+    'section'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BookingResponseDto
+     */
+    'managers_notes'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof BookingResponseDto
+     */
+    'customers_notes'?: string;
 }
 
 export const BookingResponseDtoTypeEnum = {
@@ -110,58 +140,58 @@ export type BookingResponseDtoTypeEnum = typeof BookingResponseDtoTypeEnum[keyof
 export interface CreateBookingDto {
     /**
      * 
-     * @type {string}
+     * @type {object}
      * @memberof CreateBookingDto
      */
-    'id': string;
+    'customer': object;
     /**
      * 
      * @type {string}
      * @memberof CreateBookingDto
      */
-    'title': string;
+    'startTime': string;
     /**
      * 
      * @type {string}
      * @memberof CreateBookingDto
      */
-    'date': string;
+    'time_slot_id': string;
     /**
      * 
      * @type {number}
      * @memberof CreateBookingDto
      */
-    'duration': number;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateBookingDto
-     */
-    'description': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateBookingDto
-     */
-    'category': string;
+    'party_size'?: number;
     /**
      * 
      * @type {number}
      * @memberof CreateBookingDto
      */
-    'price': number;
+    'managers_notes'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateBookingDto
+     */
+    'customers_notes'?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CreateBookingDto
+     */
+    'is_host'?: boolean;
+    /**
+     * 
+     * @type {object}
+     * @memberof CreateBookingDto
+     */
+    'service': object;
     /**
      * 
      * @type {string}
      * @memberof CreateBookingDto
      */
-    'location': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateBookingDto
-     */
-    'type': CreateBookingDtoTypeEnum;
+    'type'?: CreateBookingDtoTypeEnum;
 }
 
 export const CreateBookingDtoTypeEnum = {
@@ -182,31 +212,61 @@ export interface CreateServiceDto {
      * @type {string}
      * @memberof CreateServiceDto
      */
-    'name': string;
+    'title': string;
+    /**
+     * 
+     * @type {Array<object>}
+     * @memberof CreateServiceDto
+     */
+    'timeSlots': Array<object>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CreateServiceDto
+     */
+    'sections'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateServiceDto
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CreateServiceDto
+     */
+    'image'?: string;
     /**
      * 
      * @type {number}
      * @memberof CreateServiceDto
      */
-    'price': number;
+    'price'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CreateServiceDto
+     */
+    'duration'?: number;
     /**
      * 
      * @type {string}
      * @memberof CreateServiceDto
      */
-    'description': string;
+    'venue'?: string;
     /**
      * 
      * @type {string}
      * @memberof CreateServiceDto
      */
-    'image': string;
+    'creatorEmail'?: string;
     /**
      * 
-     * @type {string}
+     * @type {object}
      * @memberof CreateServiceDto
      */
-    'longDescription': string;
+    'reminder'?: object;
 }
 /**
  * 
@@ -238,49 +298,103 @@ export interface ServiceResponseDto {
      * @type {string}
      * @memberof ServiceResponseDto
      */
-    'name': string;
+    'title': string;
+    /**
+     * 
+     * @type {Array<object>}
+     * @memberof ServiceResponseDto
+     */
+    'timeSlots'?: Array<object>;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof ServiceResponseDto
+     */
+    'sections'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof ServiceResponseDto
+     */
+    'description'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ServiceResponseDto
+     */
+    'image'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ServiceResponseDto
+     */
+    'venue'?: string;
     /**
      * 
      * @type {number}
      * @memberof ServiceResponseDto
      */
-    'price': number;
+    'duration'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ServiceResponseDto
+     */
+    'price'?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ServiceResponseDto
+     */
+    'isCancelled'?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof ServiceResponseDto
+     */
+    'maxCapacity'?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ServiceResponseDto
+     */
+    'maxPartySize'?: number;
     /**
      * 
      * @type {string}
      * @memberof ServiceResponseDto
      */
-    'description': string;
+    'startDateTime'?: string;
     /**
      * 
      * @type {string}
      * @memberof ServiceResponseDto
      */
-    'image': string;
+    'creatorEmail'?: string;
+    /**
+     * 
+     * @type {object}
+     * @memberof ServiceResponseDto
+     */
+    'reminder'?: object;
     /**
      * 
      * @type {string}
      * @memberof ServiceResponseDto
      */
-    'longDescription': string;
+    'created_at'?: string;
     /**
      * 
      * @type {string}
      * @memberof ServiceResponseDto
      */
-    'created_at': string;
+    'updated_at'?: string;
     /**
      * 
      * @type {string}
      * @memberof ServiceResponseDto
      */
-    'updated_at': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ServiceResponseDto
-     */
-    'type': ServiceResponseDtoTypeEnum;
+    'type'?: ServiceResponseDtoTypeEnum;
 }
 
 export const ServiceResponseDtoTypeEnum = {
@@ -298,61 +412,53 @@ export type ServiceResponseDtoTypeEnum = typeof ServiceResponseDtoTypeEnum[keyof
 export interface UpdateBookingDto {
     /**
      * 
-     * @type {string}
+     * @type {object}
      * @memberof UpdateBookingDto
      */
-    'title': string;
+    'customer': object;
     /**
      * 
      * @type {string}
      * @memberof UpdateBookingDto
      */
-    'date': string;
+    'startTime': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateBookingDto
+     */
+    'time_slot_id': string;
     /**
      * 
      * @type {number}
      * @memberof UpdateBookingDto
      */
-    'duration': number;
+    'party_size'?: number;
     /**
      * 
      * @type {string}
      * @memberof UpdateBookingDto
      */
-    'description': string;
+    'managers_notes'?: string;
     /**
      * 
      * @type {string}
      * @memberof UpdateBookingDto
      */
-    'category': string;
+    'customers_notes'?: string;
     /**
      * 
-     * @type {number}
+     * @type {boolean}
      * @memberof UpdateBookingDto
      */
-    'price': number;
+    'is_host'?: boolean;
     /**
      * 
-     * @type {string}
+     * @type {object}
      * @memberof UpdateBookingDto
      */
-    'location': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UpdateBookingDto
-     */
-    'type': UpdateBookingDtoTypeEnum;
+    'service': object;
 }
-
-export const UpdateBookingDtoTypeEnum = {
-    Remote: 'remote',
-    Inperson: 'inperson'
-} as const;
-
-export type UpdateBookingDtoTypeEnum = typeof UpdateBookingDtoTypeEnum[keyof typeof UpdateBookingDtoTypeEnum];
-
 /**
  * 
  * @export
@@ -364,13 +470,19 @@ export interface UpdateServiceDto {
      * @type {string}
      * @memberof UpdateServiceDto
      */
-    'name': string;
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateServiceDto
+     */
+    'dateTime': string;
     /**
      * 
      * @type {number}
      * @memberof UpdateServiceDto
      */
-    'price': number;
+    'duration': number;
     /**
      * 
      * @type {string}
@@ -388,8 +500,34 @@ export interface UpdateServiceDto {
      * @type {string}
      * @memberof UpdateServiceDto
      */
-    'longDescription': string;
+    'category': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof UpdateServiceDto
+     */
+    'price': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateServiceDto
+     */
+    'location': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UpdateServiceDto
+     */
+    'type': UpdateServiceDtoTypeEnum;
 }
+
+export const UpdateServiceDtoTypeEnum = {
+    Remote: 'remote',
+    Inperson: 'inperson'
+} as const;
+
+export type UpdateServiceDtoTypeEnum = typeof UpdateServiceDtoTypeEnum[keyof typeof UpdateServiceDtoTypeEnum];
+
 
 /**
  * DefaultApi - axios parameter creator
@@ -433,35 +571,6 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          */
         appControllerGetDataTwo: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/2`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        authorizedControllerIndex: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/authorized`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -667,93 +776,6 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(updateBookingDto, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        cartControllerCreate: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/cart`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        cartControllerDestroy: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/cart`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        cartControllerIndex: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/cart`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1053,15 +1075,6 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async authorizedControllerIndex(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authorizedControllerIndex(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @param {string} type 
          * @param {CreateBookingDto} createBookingDto 
          * @param {*} [options] Override http request option.
@@ -1113,33 +1126,6 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          */
         async bookingControllerUpdateReport(type: string, id: string, updateBookingDto: UpdateBookingDto, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BookingResponseDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.bookingControllerUpdateReport(type, id, updateBookingDto, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async cartControllerCreate(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.cartControllerCreate(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async cartControllerDestroy(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.cartControllerDestroy(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async cartControllerIndex(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.cartControllerIndex(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1247,14 +1233,6 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        authorizedControllerIndex(options?: any): AxiosPromise<void> {
-            return localVarFp.authorizedControllerIndex(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @param {string} type 
          * @param {CreateBookingDto} createBookingDto 
          * @param {*} [options] Override http request option.
@@ -1302,30 +1280,6 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          */
         bookingControllerUpdateReport(type: string, id: string, updateBookingDto: UpdateBookingDto, options?: any): AxiosPromise<BookingResponseDto> {
             return localVarFp.bookingControllerUpdateReport(type, id, updateBookingDto, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        cartControllerCreate(options?: any): AxiosPromise<object> {
-            return localVarFp.cartControllerCreate(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        cartControllerDestroy(options?: any): AxiosPromise<object> {
-            return localVarFp.cartControllerDestroy(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        cartControllerIndex(options?: any): AxiosPromise<object> {
-            return localVarFp.cartControllerIndex(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1681,16 +1635,6 @@ export class DefaultApi extends BaseAPI {
 
     /**
      * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public authorizedControllerIndex(options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).authorizedControllerIndex(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
      * @param {DefaultApiBookingControllerCreateReportRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1742,36 +1686,6 @@ export class DefaultApi extends BaseAPI {
      */
     public bookingControllerUpdateReport(requestParameters: DefaultApiBookingControllerUpdateReportRequest, options?: AxiosRequestConfig) {
         return DefaultApiFp(this.configuration).bookingControllerUpdateReport(requestParameters.type, requestParameters.id, requestParameters.updateBookingDto, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public cartControllerCreate(options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).cartControllerCreate(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public cartControllerDestroy(options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).cartControllerDestroy(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApi
-     */
-    public cartControllerIndex(options?: AxiosRequestConfig) {
-        return DefaultApiFp(this.configuration).cartControllerIndex(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -36,7 +36,7 @@ erDiagram
     TIMESLOTS ||--o{ BOOKINGS : creates
     TIMESLOTS {
         id string
-        start_time Date
+        startTime Date
         availability_count number
         booking_count number
         is_bookable boolean

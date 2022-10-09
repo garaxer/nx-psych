@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import api from './';
+import api from '.';
 import {
   CreateServiceDto,
   ServiceResponseDto,
 } from 'libs/shared-types/src/lib/api/generated';
 
-const useAddInvoice = () => {
+const useAddService = () => {
   const [data, setData] = useState<ServiceResponseDto | undefined>();
   const [isMutating, setIsMutating] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -37,4 +37,4 @@ const useAddInvoice = () => {
   return { state, mutate, resetData };
 };
 
-export default useAddInvoice;
+export default useAddService;

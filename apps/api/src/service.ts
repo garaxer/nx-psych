@@ -32,8 +32,8 @@ export const data: { services: Service[] } = {
       id: '1',
       title: 'Lunch',
       timeSlots: [
-        { id: '1', start_time: new Date('08-08-2022 12:00') },
-        { id: '1', start_time: new Date('08-08-2022 12:30') },
+        { id: '1', startTime: new Date('08-08-2022 12:00') },
+        { id: '1', startTime: new Date('08-08-2022 12:30') },
       ],
       duration: 30,
       description: 'Appointment',
@@ -44,8 +44,8 @@ export const data: { services: Service[] } = {
       id: '2',
       title: 'Dinner',
       timeSlots: [
-        { id: '1', start_time: new Date('08-08-2022 17:00') },
-        { id: '1', start_time: new Date('08-08-2022 18:00') },
+        { id: '1', startTime: new Date('08-08-2022 17:00') },
+        { id: '1', startTime: new Date('08-08-2022 18:00') },
       ],
       duration: 60,
       description: 'Appointment',

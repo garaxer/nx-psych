@@ -62,3 +62,5 @@ auth
 create service
 view service
 attend service - seperate react micro ui, use the psych folder, much like the restaurant booking api
+
+eventual goal to have virtualised scrolling of bookings or time slots, Service has date then TimeSlots?

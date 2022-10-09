@@ -16,13 +16,21 @@ export class CreateServiceDto {
   title: string;
   @IsNotEmpty()
   timeSlots: CreateTimeSlotDto[];
+  @IsOptional()
   sections?: string[];
+  @IsOptional()
   description?: string;
+  @IsOptional()
   image?: string;
+  @IsOptional()
   price?: number;
+  @IsOptional()
   duration?: number;
+  @IsOptional()
   venue?: string;
+  @IsOptional()
   creatorEmail?: string;
+  @IsOptional()
   reminder?: Reminder;
 }
 

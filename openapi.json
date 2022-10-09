@@ -573,7 +573,7 @@
           "customer": {
             "type": "object"
           },
-          "start_time": {
+          "startTime": {
             "type": "string"
           },
           "time_slot_id": {
@@ -604,7 +604,7 @@
         },
         "required": [
           "customer",
-          "start_time",
+          "startTime",
           "time_slot_id",
           "service"
         ]
@@ -615,7 +615,7 @@
           "customer": {
             "type": "object"
           },
-          "start_time": {
+          "startTime": {
             "type": "string"
           },
           "time_slot_id": {
@@ -639,7 +639,7 @@
         },
         "required": [
           "customer",
-          "start_time",
+          "startTime",
           "time_slot_id",
           "service"
         ]

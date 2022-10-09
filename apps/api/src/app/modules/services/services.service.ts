@@ -60,7 +60,7 @@ export class ServiceService {
       timeSlots: body.timeSlots.map((ts) => ({
         ...ts,
         id: uuid(),
-        start_time: new Date(ts.start_time),
+        startTime: new Date(ts.startTime),
       })),
       created_at: new Date(),
       updated_at: new Date(),

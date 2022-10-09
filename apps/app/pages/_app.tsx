@@ -17,16 +17,20 @@ function CustomApp({ Component, pageProps }: AppProps) {
         <title>Craig&apos;s Counselling</title>
       </Head>
       <Main>
-        <Auth0Provider  domain={
-          process.env.AUTH0_ISSUER_BASE_URL ||
-          process.env.NEXT_PUBLIC_AUTH0_ISSUER_BASE_URL ||
-          ""
-        }
-        clientId={
-          process.env.AUTH0_CLIENT_ID ||
-          process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID ||
-          ""
-        }>
+        <Auth0Provider
+          // domain={
+          //   process.env.AUTH0_ISSUER_BASE_URL ||
+          //   process.env.NEXT_PUBLIC_AUTH0_ISSUER_BASE_URL ||
+          //   ""
+          // }
+          // clientId={
+          //   process.env.AUTH0_CLIENT_ID ||
+          //   process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID ||
+          //   ""
+          // }
+          domain="dev-craig.au.auth0.com"
+          clientId="Rzbq2zq5KUzVbT8OGL4jRHKg1iNmfU7N"
+        >
           <Component {...pageProps} />
         </Auth0Provider>
       </Main>

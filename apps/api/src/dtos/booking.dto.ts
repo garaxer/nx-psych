@@ -11,7 +11,7 @@ export enum BookingType {
 
 export class CreateBookingDto {
   customer: User;
-  start_time: string;
+  startTime: string;
   time_slot_id: string;
   party_size?: number;
   managers_notes?: number;
@@ -23,7 +23,7 @@ export class CreateBookingDto {
 
 export class UpdateBookingDto {
   customer: User;
-  start_time: string;
+  startTime: string;
   time_slot_id: string;
   party_size?: number;
   managers_notes?: string;
